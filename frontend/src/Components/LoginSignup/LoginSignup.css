@@ -1,4 +1,4 @@
-.container{
+.card-container{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -10,7 +10,7 @@
     padding: 2em;
 }
 
-.container:hover{
+.card-container:hover{
     animation: container-glow 2s infinite alternate;
     transform: scale(1.05);
 }
@@ -21,6 +21,13 @@
     } to{
         box-shadow: 0 0 10px 10px #4675a4;
     }
+}
+
+#LoginSignup{
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
 }
 
 .form{

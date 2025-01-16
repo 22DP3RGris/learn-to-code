@@ -1,11 +1,14 @@
 import './App.css';
-import LoginSignup from './Components/LoginSignup/LoginSignup';
+import React from 'react';
+import { RouterProvider } from 'react-router-dom';
+import router from './router.jsx';
 
 function App(){
     return (
-        <div id="form">
-            <LoginSignup/>
-        </div>);
+        <React.StrictMode>
+            <RouterProvider router={router}/>
+        </React.StrictMode>
+    );
 }
 
 export default App;

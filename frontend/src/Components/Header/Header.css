@@ -1,0 +1,36 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between; 
+    width: 100%;
+    background-color: #142639;
+    margin-bottom: 2em;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+
+.logo img {
+    padding: 1em;
+    cursor: pointer;
+    display: block;
+    width: 6em;
+    height: auto;
+    transition: 0.5s background-color; 
+}
+
+.logo img:hover {
+    background-color: #223549;
+}
+
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 50%;
+}
+
