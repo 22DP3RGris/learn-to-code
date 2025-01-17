@@ -7,12 +7,11 @@
     border: #252729 5px solid;
     box-shadow: 0 0 5px 1px #4c7196;
     transition: transform 0.1s;
-    padding: 2em;
+    padding: 2em 2em 0.5em 2em;
 }
 
 .card-container:hover{
     animation: container-glow 2s infinite alternate;
-    transform: scale(1.05);
 }
 
 @keyframes container-glow{

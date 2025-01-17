@@ -11,6 +11,7 @@ function Header({ page }) {
         setCurrentPage(page || "LEARN TO CODE");
     }, [page]);
 
+
     return (
         <header className="header">
             <div className="logo">
