@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import './LoginSignup.css';
 import { useNavigate} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,18 +8,21 @@ import axiosClient from "../../axios-client.js";
 import { useStateContext } from "../../contexts/ContextProvider.jsx";
 
 function LoginSignup({ action: initialAction }) {
-    const { token } = useStateContext();
+    const { token, setUser, setToken } = useStateContext();
     const navigate = useNavigate();
 
-    console.log(token);
+    // if (token) {
+    //     navigate("/");
+    // }
 
-    const [action, setAction] = React.useState(initialAction || "Sign Up");
+    const [action, setAction] = useState(initialAction || "Sign Up");
 
     const usernameRef = useRef();
     const emailRef = useRef();
     const phoneRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
+    const [errors, setErrors] = useState(null);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -28,9 +31,11 @@ function LoginSignup({ action: initialAction }) {
         const phone = phoneRef.current?.value;
         const password = passwordRef.current?.value;
         const passwordConfirm = passwordConfirmRef.current?.value;
+
+        setErrors(null);
     
         const payload = action === "Sign Up"
-            ? { username, email, phone, password, passwordConfirm }
+            ? { username, email, phone, password, password_confirmation: passwordConfirm }
             : { email, password };
         
         console.log(payload);
@@ -39,9 +44,13 @@ function LoginSignup({ action: initialAction }) {
             .then(({ data }) => {
                 setUser(data.user);
                 setToken(data.token);
+                navigate("/");
             })
             .catch((error) => {
-                console.error(error);
+                const { response } = error;
+                if (response && response.status === 422) {
+                    setErrors(response.data.errors);
+                }
             });
     };
     
@@ -54,25 +63,30 @@ function LoginSignup({ action: initialAction }) {
                     <div className="inputs">
                         {action==="Login"?<div></div>:<div className="input">
                             <FontAwesomeIcon icon={faUser} className="form-icon"/>
-                            <input ref={usernameRef} type="text" placeholder="Username" required/>
+                            <input ref={usernameRef} type="text" placeholder="Username"/>
                         </div>}
                         <div className="input">
                             <FontAwesomeIcon icon={faEnvelope} className="form-icon"/>
-                            <input ref={emailRef} type="email" placeholder="Email" required/>
+                            <input ref={emailRef} type="email" placeholder="Email"/>
                         </div>
                         {action==="Login"?<div></div>:<div className="input">
                             <FontAwesomeIcon icon={faPhone} className="form-icon"/>
-                            <input ref={phoneRef} type="text" placeholder="Phone" required/>
+                            <input ref={phoneRef} type="text" placeholder="Phone"/>
                         </div>}
                         <div className="input">
                             <FontAwesomeIcon icon={faLock} className="form-icon"/>
-                            <input ref={passwordRef} type="password" placeholder="Password" required/>
+                            <input ref={passwordRef} type="password" placeholder="Password"/>
                         </div>
                         {action==="Login"?<div></div>:<div className="input">
                             <FontAwesomeIcon icon={faCheck} className="form-icon"/>
-                            <input ref={passwordConfirmRef} type="password" placeholder="Password Confirmation" required/>
+                            <input ref={passwordConfirmRef} type="password" placeholder="Password Confirmation"/>
                         </div>}
                     </div>
+                    {errors && <div className="alert">
+                        {Object.keys(errors).map((key) => (
+                            <p key={key}>{errors[key][0]}</p>
+                        ))}
+                    </div>}
                     {action==="Sign Up"?<div></div>:<div className="forgot-password"> Lost Password? <span>Click Here!</span></div>}
                     <div className="sumbit-container">
                         <button type={action === "Login" ? "button" : "submit"} className={action==="Login"?"submit gray" : "submit"} onClick={()=>{navigate("/signup"), setAction('Sign Up')}}>Sign Up</button>

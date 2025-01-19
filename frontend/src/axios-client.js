@@ -11,19 +11,23 @@ axiosClient.interceptors.request.use((config) => {
 
 axiosClient.interceptors.response.use(
     (response) => {
-      return response; // Atgriež derīgas atbildes
+        return response; 
     },
     (error) => {
-      if (error.response.status === 401) {
-        localStorage.removeItem('ACCESS_TOKEN');
-        window.location.href = '/login';
-      } else if (error.response.status === 500) {
-        alert('Servera kļūda. Lūdzu, mēģiniet vēlreiz.');
-      } else if (error.response.status === 403) {
-        alert('Jums nav tiesību veikt šo darbību.');
-      }
-      throw error; // Vienmēr atkal izmet kļūdu, lai to varētu izsekot
+        console.error(error); 
+        if (error.response) {
+            const { status } = error.response;
+            if (status === 401) {
+                localStorage.removeItem('ACCESS_TOKEN');
+                window.location.href = '/login';
+            } else if (status === 500) {
+                alert('Servera kļūda. Lūdzu, mēģiniet vēlreiz.');
+            } else if (status === 403) {
+                alert('Jums nav tiesību veikt šo darbību.');
+            }
+        }
+        throw error;
     }
-  );
+);
 
 export default axiosClient;
