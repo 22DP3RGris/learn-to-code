@@ -2,33 +2,30 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\SignupRequest;
-use App\Http\Requests\LoginRequest;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\SignupRequest;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
+use http\Env\Response;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
     public function login(LoginRequest $request)
-    {
-        $credentials = $request->validated();
-        dd($request->all());
-
-        if (!Auth::attempt($credentials)) {
-            return response()->json(['error' => 'Login failed'], 401);
+    {   
+        try {
+            $credentials = $request->validated();
+            if (!Auth::attempt($credentials)) {
+                return response()->json(['message' => 'Invalid credentials'], 422);
+            }
+    
+            $user = Auth::user();
+            $token = $user->createToken('main')->plainTextToken;
+            return response()->json(compact('user', 'token'));
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
         }
-
-        $user = Auth::user();
-
-        $token = $user->createToken('main')->plainTextToken;
-
-        return response([
-            'message' => 'Login successful',
-            'token' => $token,
-            'user' => $user,
-        ], 200);
     }
 
 
@@ -40,7 +37,7 @@ class AuthController extends Controller
             'username' => $data['username'],
             'email' => $data['email'],
             'phone' => $data['phone'],
-            'password' => Hash::make($data['password']),
+            'password' => bcrypt($data['password']),
         ]);
 
         $token = $user->createToken('auth_token')->plainTextToken;

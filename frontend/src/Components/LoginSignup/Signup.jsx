@@ -7,15 +7,17 @@ import Header from '../Header/Header.jsx';
 import axiosClient from "../../axios-client.js";
 import { useStateContext } from "../../contexts/ContextProvider.jsx";
 
-function LoginSignup({ action: initialAction }) {
+function Signup() {
     const { token, setUser, setToken } = useStateContext();
     const navigate = useNavigate();
+
+    const handleLoginClick = () => {
+        navigate('/login');
+    };
 
     // if (token) {
     //     navigate("/");
     // }
-
-    const [action, setAction] = useState(initialAction || "Sign Up");
 
     const usernameRef = useRef();
     const emailRef = useRef();
@@ -33,14 +35,10 @@ function LoginSignup({ action: initialAction }) {
         const passwordConfirm = passwordConfirmRef.current?.value;
 
         setErrors(null);
-    
-        const payload = action === "Sign Up"
-            ? { username, email, phone, password, password_confirmation: passwordConfirm }
-            : { email, password };
-        
-        console.log(payload);
 
-        axiosClient.post(`/${action.replace(/\s+/g, '').toLowerCase()}`, payload)
+        const payload = { username, email, phone, password, password_confirmation: passwordConfirm };
+        
+        axiosClient.post('/signup', payload)
             .then(({ data }) => {
                 setUser(data.user);
                 setToken(data.token);
@@ -53,44 +51,43 @@ function LoginSignup({ action: initialAction }) {
                 }
             });
     };
-    
+
     return (
-        <div id="LoginSignup">
-            <Header page={action==="Sign Up"?"REGISTRATION":"LOGING IN"}/>
+        <div className="LoginSignup">
+            <Header page="REGISTRATION"/>
             <div className="card-container">
                 <form className="form" onSubmit={handleSubmit}>
-                    <h1>{action==="Sign Up"?"REGISTRATION":"LOGING IN"}</h1>
+                    <h1>REGISTRATION</h1>
                     <div className="inputs">
-                        {action==="Login"?<div></div>:<div className="input">
+                        <div className="input">
                             <FontAwesomeIcon icon={faUser} className="form-icon"/>
                             <input ref={usernameRef} type="text" placeholder="Username"/>
-                        </div>}
+                        </div>
                         <div className="input">
                             <FontAwesomeIcon icon={faEnvelope} className="form-icon"/>
                             <input ref={emailRef} type="email" placeholder="Email"/>
                         </div>
-                        {action==="Login"?<div></div>:<div className="input">
+                        <div className="input">
                             <FontAwesomeIcon icon={faPhone} className="form-icon"/>
                             <input ref={phoneRef} type="text" placeholder="Phone"/>
-                        </div>}
+                        </div>
                         <div className="input">
                             <FontAwesomeIcon icon={faLock} className="form-icon"/>
                             <input ref={passwordRef} type="password" placeholder="Password"/>
                         </div>
-                        {action==="Login"?<div></div>:<div className="input">
+                        <div className="input">
                             <FontAwesomeIcon icon={faCheck} className="form-icon"/>
                             <input ref={passwordConfirmRef} type="password" placeholder="Password Confirmation"/>
-                        </div>}
+                        </div>
                     </div>
-                    {errors && <div className="alert">
+                    {errors && <div className="alerts">
                         {Object.keys(errors).map((key) => (
-                            <p key={key}>{errors[key][0]}</p>
+                            <p key={key} class="alert">{errors[key][0]}</p>
                         ))}
                     </div>}
-                    {action==="Sign Up"?<div></div>:<div className="forgot-password"> Lost Password? <span>Click Here!</span></div>}
+                    <div className="tip">Already have an account? <span onClick={handleLoginClick} >Login</span></div>
                     <div className="sumbit-container">
-                        <button type={action === "Login" ? "button" : "submit"} className={action==="Login"?"submit gray" : "submit"} onClick={()=>{navigate("/signup"), setAction('Sign Up')}}>Sign Up</button>
-                        <button type={action === "Sign Up" ? "button" : "submit"} className={action==="Sign Up"?"submit gray" : "submit"} onClick={()=>{navigate("/login"), setAction('Login')}}>Login</button>
+                        <button type="submit" className="submit">Sign Up</button>
                     </div>
                 </form>
             </div>
@@ -98,4 +95,4 @@ function LoginSignup({ action: initialAction }) {
     );
 }
 
-export default LoginSignup;
+export default Signup;

@@ -1,16 +1,14 @@
 .card-container{
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: center;
+    width: 25vw;
     background-color: #395a7d;
     border-radius: 15px;
     border: #252729 5px solid;
     box-shadow: 0 0 5px 1px #4c7196;
     transition: transform 0.1s;
-    padding: 2em 2em 0.5em 2em;
-}
-
-.card-container:hover{
+    padding: 1.7em 2em 0em 2em;
     animation: container-glow 2s infinite alternate;
 }
 
@@ -22,7 +20,7 @@
     }
 }
 
-#LoginSignup{
+.LoginSignup{
     display: flex;
     height: 100vh;
     flex-direction: column;
@@ -31,6 +29,7 @@
 
 .form{
     display: flex;
+    width: 100%;
     flex-direction: column;
     align-items: center;
 }
@@ -39,7 +38,7 @@
     display: flex;
     background-color: #c25c5c;
     color: #F8F9FA;
-    font-size: 2em;
+    font-size: 1.6em;
     width: 100%;
     justify-content: center;
     padding: 0.5em 0;
@@ -48,7 +47,7 @@
 }
 
 .inputs{
-    display: flexbox;
+    display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
@@ -58,9 +57,10 @@
     display: flex;
     align-items: center;
     background-color: #36849e;
-    padding: 0.8em 1.5em;
+    padding: 0.2em 1.5em;
+    width: 100%;
     border-radius: 10px;
-    margin-bottom: 1.3em;
+    margin-bottom: 0.9em;
     transition: background-color 0.5s;
 }
 
@@ -83,13 +83,12 @@
     margin-right: 0.2em;
 }
 
-.forgot-password{
+.tip{
     color: #bbbcbd;
     font-size: 1em;
-    margin-bottom: 0.5em;
 }
 
-.forgot-password span{
+.tip span{
     color: #79bcff;
     cursor: pointer;
 }
@@ -98,21 +97,23 @@
     display: flex;
     gap: 1em;
     margin: 1em auto;
+    width: 100%;
 }
 
 .submit{
-    background-color: #c25c5c;
+    background-color: #04AA6D;
     color: #F8F9FA;
     padding: 0.5em 2.5em;
-    font-size: 1.5em;
-    border: 2px solid #a85050;
-    border-radius: 2em;
+    font-size: 1.2em;
+    width: 100%;
+    border: 2px solid #048355;
+    border-radius: 0.8em;
     cursor: pointer;
     transition: background-color 0.5s;
 }
 
 .submit:hover{
-    background-color: #ce6b6b;
+    background-color: #439c7b;
 }
 
 .gray{
@@ -125,6 +126,13 @@
     background-color: #b8b9ba;
 }
 
+.alerts{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
 .alert{
     display: flexbox;
     width: 100%;
@@ -132,8 +140,9 @@
     justify-content: center;
     align-items: center;
     background-color: #c25c5c;
+    border: solid 1px #a43d3d;
+    padding: 0.3em 0;
     color: #F8F9FA;
-    padding: 0.5em 1em;
-    border-radius: 10px;
-    margin-bottom: 1em;
+    border-radius: 4px;
+    margin-bottom: 0.4em;
 }
