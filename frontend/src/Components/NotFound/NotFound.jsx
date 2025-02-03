@@ -8,7 +8,7 @@ function NotFound() {
     return (
         <div id="notfound">
             <Header/>
-            <div className="container">
+            <div className="notfound-container">
                 <div>
                     <h2>404 Not Found</h2>
                     <p id='notfound-msg'>The page "{location.pathname}" could not be found.</p>

@@ -8,16 +8,12 @@ import axiosClient from "../../axios-client.js";
 import { useStateContext } from "../../contexts/ContextProvider.jsx";
 
 function Login() {
-    const { token, setUser, setToken } = useStateContext();
+    const {user, token, setUser, setToken } = useStateContext();
     const navigate = useNavigate();
 
     const handleDontHaveAnAccountClick = () => {
         navigate('/signup');
     };
-
-    // if (token) {
-    //     navigate("/");
-    // }
 
     const emailRef = useRef();
     const passwordRef = useRef();
@@ -36,13 +32,19 @@ function Login() {
         axiosClient.post("/login", payload)
             .then(({ data }) => {
                 setUser(data.user);
+                console.log(user);
                 setToken(data.token);
                 navigate("/");
             })
             .catch((error) => {
                 const { response } = error;
                 if (response && response.status === 422) {
-                    setErrors(response.data.errors);
+                    if (response.data.errors){
+                        setErrors(response.data.errors);
+                    }
+                    else{
+                        setErrors({ email: [response.data.message] });
+                    }
                 }
             });
     };

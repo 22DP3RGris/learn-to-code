@@ -17,7 +17,7 @@ class AuthController extends Controller
         try {
             $credentials = $request->validated();
             if (!Auth::attempt($credentials)) {
-                return response()->json(['message' => 'Invalid credentials'], 422);
+                return response()->json(['message' => 'Your email and password do not match!'], 422);
             }
     
             $user = Auth::user();
@@ -47,12 +47,9 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        if ($request->user()) {
-            $request->user()->currentAccessToken()->delete();
-            return response(['message' => 'Logged out successfully'], 200);
-        }
-
-        return response(['message' => 'No active session'], 400);
+        $user = $request->user();
+        $user->currentAccessToken()->delete();
+        return response('', 204);
     }
 }
 

@@ -1,4 +1,4 @@
-.container{
+.notfound-container{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,7 +8,7 @@
     border: #252729 5px solid;
 }
 
-.container h2{
+.notfound-container h2{
     color: #F8F9FA;
     font-size: 2em;
     margin-bottom: 0.5em;
