@@ -15,10 +15,6 @@ function Signup() {
         navigate('/login');
     };
 
-    // if (token) {
-    //     navigate("/");
-    // }
-
     const usernameRef = useRef();
     const emailRef = useRef();
     const phoneRef = useRef();
@@ -82,7 +78,7 @@ function Signup() {
                     </div>
                     {errors && <div className="alerts">
                         {Object.keys(errors).map((key) => (
-                            <p key={key} class="alert">{errors[key][0]}</p>
+                            <p key={key} className="alert">{errors[key][0]}</p>
                         ))}
                     </div>}
                     <div className="tip">Already have an account? <span onClick={handleLoginClick} >Login</span></div>

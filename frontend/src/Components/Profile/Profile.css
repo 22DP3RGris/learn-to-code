@@ -6,12 +6,13 @@
 }
 
 .profile-container{
+    min-width: 25em;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 25vw;
-    margin-top: 1em;
+    margin-top: 3em;
     padding: 2em;
     background-color: #395a7d;
     border-radius: 20px;
@@ -48,6 +49,10 @@
     padding: 0.5em 2em;
     border-radius: 10px;
     margin-bottom: 0.5em;
+}
+
+.profile-field p{
+    word-break: break-word;
 }
 
 

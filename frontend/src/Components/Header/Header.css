@@ -1,11 +1,11 @@
 .header {
     display: flex;
+    z-index: 10;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between; 
     width: 100%;
+    justify-content: space-between;
     background-color: #142639;
-    margin-bottom: 2em;
 }
 
 .logo {
@@ -26,11 +26,84 @@
 .logo img:hover {
     background-color: #223549;
 }
+h1{
+    color: #F8F9FA;
+    font-size: 2em;
+    margin-left: 0.5em;
+}
 
 .navbar{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 50%;
+    height: 100%;
+    width: 40%;
+    flex-direction: row-reverse;
+}
+
+.navbar ul{
+    height: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar ul li{
+    border-left: #101e2d solid 1px;
+    width: 5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 1em;
+}
+
+.navbar ul li a{
+    color: #F8F9FA;
+    text-decoration: none;
+    font-size: 1.2em;
+    transition: 0.5s color;
+}
+
+.nav-icon{
+    font-size: 2em;
+}
+
+.navbar ul li:hover{
+    cursor: pointer;
+    background-color: #223549;
+}
+
+.ham-menu{
+    border-left: #101e2d solid 1px;
+    width: 5em;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 1em;;
+    cursor: pointer;
+}
+
+.ham-icon{
+    font-size: 2em;
+}
+
+.ham-menu:hover{
+    background-color: #223549;
+}
+
+@media screen and (max-width: 768px){
+    .navbar{
+        width: 20%;
+    }
+    
+    .navbar ul{
+        display: none;
+    }
+
+    .ham-menu{
+        display: flex;
+    }
 }
 

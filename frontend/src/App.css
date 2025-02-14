@@ -5,3 +5,27 @@
     justify-content: center;
     align-items: center;
 }
+
+.content{
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 100%;
+}
+
+.main-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    
+}
+
+@keyframes container-glow{
+    from {
+        box-shadow: 0 0 -10px 10px #4675a4
+    } to{
+        box-shadow: 0 0 10px 10px #4675a4;
+    }
+}

@@ -2,10 +2,10 @@ import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { useStateContext } from "../contexts/ContextProvider";
 
-function DefaultLayout({ children }) {
+function GuestLayout() {
     const {user, token} = useStateContext();
-    if (!token){
-        return <Navigate to="/login"/>;
+    if (token){
+        return <Navigate to="/"/>;
     }
     return (
         <div>
@@ -14,4 +14,4 @@ function DefaultLayout({ children }) {
     );
 }
 
-export default DefaultLayout;
+export default GuestLayout;
