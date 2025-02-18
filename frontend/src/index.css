@@ -3,6 +3,7 @@
 *{
     margin: 0;
     padding: 0;
+    max-width: 100%;
     box-sizing: border-box;
     color: #F8F9FA;
     font-family: 'Open Sans', sans-serif;

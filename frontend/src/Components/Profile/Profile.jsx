@@ -17,9 +17,6 @@ function Profile() {
             setUser(data);
             setLoading(false);
           })
-          .catch(() => {
-            setLoading(false);
-          });
     }, []);
 
     const onLogout = ev => {

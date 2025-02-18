@@ -1,4 +1,4 @@
-#form{
+#form {
     display: flex;
     height: 100vh;
     flex-direction: column;
@@ -6,26 +6,49 @@
     align-items: center;
 }
 
-.content{
-    display: flex;
-    flex-direction: row;
-    width: 100vw;
+#root {
     height: 100%;
 }
 
-.main-container{
+.content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+::-webkit-scrollbar {
+    width: 10px; 
+}
+
+::-webkit-scrollbar-track {
+    background: #1d3958;
+    box-shadow: inset 0 0 5px #164a41;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #b3d6f0;  
+    box-shadow: inset 0 0 0 3px #1d3958;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #98cdf5;
+    cursor: pointer;
+}
+
+.main-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
     height: 100%;
-    
 }
 
-@keyframes container-glow{
+@keyframes container-glow {
     from {
-        box-shadow: 0 0 -10px 10px #4675a4
-    } to{
+        box-shadow: 0 0 0px 10px #4675a4;
+    } 
+    to {
         box-shadow: 0 0 10px 10px #4675a4;
     }
 }
