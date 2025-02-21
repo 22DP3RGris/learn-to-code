@@ -54,7 +54,7 @@ function Login() {
             <Header page="LOGING IN"/>
             <div className="card-container">
                 <form className="form" onSubmit={handleSubmit}>
-                    <h1>LOGING IN</h1>
+                    <h1>LOGGING IN</h1>
                     <div className="inputs">
                         <div className="input">
                             <FontAwesomeIcon icon={faEnvelope} className="form-icon"/>

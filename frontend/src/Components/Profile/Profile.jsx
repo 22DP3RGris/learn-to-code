@@ -15,6 +15,7 @@ function Profile() {
         axiosClient.get('/user')
           .then(({ data }) => {
             setUser(data);
+            console.log(data);
             setLoading(false);
           })
     }, []);
