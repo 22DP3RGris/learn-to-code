@@ -51,7 +51,7 @@ function Login() {
 
     return (
         <div className="LoginSignup">
-            <Header page="LOGING IN"/>
+            <Header page="LOGGING IN"/>
             <div className="card-container">
                 <form className="form" onSubmit={handleSubmit}>
                     <h1>LOGGING IN</h1>

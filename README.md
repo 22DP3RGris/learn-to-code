@@ -24,7 +24,7 @@ veidošana;
 - Laravel
 - MySQL
 
-## Izstrādes stāvkoļi
+## Izstrādes stāvokļi
 
 - [x] Lietotnes galvene ar navigāciju uz profilu reģistrētajiem lietotājiem (Header);
 - [x] Lietotnes kājene (Footer);
