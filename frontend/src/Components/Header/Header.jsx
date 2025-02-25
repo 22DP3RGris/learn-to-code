@@ -2,7 +2,7 @@ import './Header.css';
 import React, { useEffect } from "react";
 import Logo from '../../assets/LTC-LOGO.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faBars} from '@fortawesome/free-solid-svg-icons';
+import { faUser, faBars, faRightToBracket} from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { useStateContext } from '../../contexts/ContextProvider';
 
@@ -24,8 +24,14 @@ function Header({ page }) {
             </div>
             <nav className="navbar">
                 <ul>
-                    {token && (
-                    <li onClick={() => navigate('/profile')}><a><FontAwesomeIcon icon={faUser} className='nav-icon'/></a></li>)}
+                    {token ? (
+                        <li onClick={() => navigate('/profile')}>
+                            <a><FontAwesomeIcon icon={faUser} className='nav-icon'/></a>
+                        </li>) : (
+                        <li onClick={() => navigate('/login')}>
+                            <a><FontAwesomeIcon icon={faRightToBracket} className='nav-icon'/></a>
+                        </li>
+                    )}
                 </ul>
                 <div className='ham-menu'>
                     <FontAwesomeIcon icon={faBars} className='ham-icon'/>

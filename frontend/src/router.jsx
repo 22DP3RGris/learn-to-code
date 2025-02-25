@@ -6,6 +6,7 @@ import DefaultLayout from './Layouts/DefaultLayout.jsx';
 import GuestLayout from './Layouts/GuestLayout.jsx';
 import Profile from './Components/Profile/Profile.jsx';
 import News from './Components/News/News.jsx';
+import ProgrammingLanguages from './Components/Education/ProgrammingLanguages/ProgrammingLanguages.jsx';
 
 const router = createBrowserRouter([
     {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
             {
                 path: '/profile',
                 element: <Profile/>
+            },
+            {
+                path: '/programming-languages',
+                element: <ProgrammingLanguages/>
             },
             {
                 path: '/',
@@ -33,6 +38,10 @@ const router = createBrowserRouter([
             {
                 path: '/signup',
                 element: <Signup/>
+            },
+            {
+                path: '/',
+                element: <News/>
             },
         ]
     },

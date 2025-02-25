@@ -4,7 +4,6 @@
     flex-direction: row;
     align-items: center;
     position: sticky;
-    overflow: hidden;
     top: 0;
     left: 0;
     width: 100%;
@@ -23,8 +22,8 @@
     padding: 1em;
     cursor: pointer;
     display: block;
-    width: 6em;
-    height: auto;
+    width: auto;
+    height: 6em;
     transition: 0.5s background-color; 
 }
 
@@ -59,6 +58,7 @@ h1{
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 5em;
     height: 100%;
     padding: 1em;
 }
@@ -71,7 +71,7 @@ h1{
 }
 
 .nav-icon{
-    font-size: 2em;
+    font-size: 2.5em;
 }
 
 .navbar ul li:hover{
@@ -91,7 +91,7 @@ h1{
 }
 
 .ham-icon{
-    font-size: 2em;
+    font-size: 2.5em;
 }
 
 .ham-menu:hover{
