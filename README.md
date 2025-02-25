@@ -28,6 +28,7 @@ veidošana;
 
 - [x] Lietotnes galvene ar navigāciju uz profilu reģistrētajiem lietotājiem (Header);
 - [x] Lietotnes kājene (Footer);
+![image](/frontend/public/Footer.png)
 - [x] Pielāgota lietotnes ritjosla (web scrollkit)
 - [x] Reģistrēšanas/Ielogošanas/Izlogošanas iespēja gan frontend, gan backend, ierakstu saglabāšana MySQL datubāzē;
 ![image](/frontend/public/Login.png)
@@ -38,14 +39,14 @@ veidošana;
 ![image](/frontend/public/Profile.png)
 - [x] Sānu navigācijas iekļaušana projekta lapās (SideBar);
 ![image](/frontend/public/Sidebar.png)
-- [x] 404 NotFound lapa;
+- [x] 404 NotFound lapa (Tiks uzlabots dizains);
 - [x] Iesākta lomu sadalīšana viesim (1. Bilde) un reģistrētajam lietotājam (2. bilde) pamatojoties uz piešķirto access token;
 ![image](/frontend/public/404-notfound-unlogged.png)
 ![image](/frontend/public/404-logged.png)
 - [x] Dizains tiek pārveidots par responsīvu dažādās ierīcēs;
 ![image](/frontend/public/Phoneview.png)
 - [ ] Galvenā lapa, vienlaikus jaunumu sadaļa (News) !!! IZSTRĀDES PROCESĀ
-- [ ] Pirmā teorija sadaļa par Python pamatiem !!! TIEK PLĀNOTS IZSKATS
+- [ ] Pirmā teorija sadaļa par Python pamatiem !!! TIEK PLĀNOTS IZSKATS UN DATUBĀZES STRUKTŪRA
 - [ ] Teorētisko uzdevumu sadaļa par Python pamatiem;
 - [ ] Praktisko uzdevumu sadaļa par Python pamatiem !!! TIEK DOMĀTS, KĀ VARĒS PALAIST IESNIEGTO KODU
 - [ ] Izveidot skolotāja lomu, kam būs tiesības veidot uzdevumus un teoriju;

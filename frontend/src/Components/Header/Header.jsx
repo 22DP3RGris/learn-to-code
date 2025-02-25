@@ -24,13 +24,16 @@ function Header({ page }) {
             </div>
             <nav className="navbar">
                 <ul>
-                    {token ? (
-                        <li onClick={() => navigate('/profile')}>
-                            <a><FontAwesomeIcon icon={faUser} className='nav-icon'/></a>
-                        </li>) : (
-                        <li onClick={() => navigate('/login')}>
-                            <a><FontAwesomeIcon icon={faRightToBracket} className='nav-icon'/></a>
-                        </li>
+                    {page !== 'LOGGING IN' && page !== 'REGISTRATION' && (
+                        token ? (
+                            <li onClick={() => navigate('/profile')}>
+                                <a><FontAwesomeIcon icon={faUser} className='nav-icon' /></a>
+                            </li>
+                        ) : (
+                            <li onClick={() => navigate('/login')}>
+                                <a><FontAwesomeIcon icon={faRightToBracket} className='nav-icon' /></a>
+                            </li>
+                        )
                     )}
                 </ul>
                 <div className='ham-menu'>

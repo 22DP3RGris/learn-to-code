@@ -13,8 +13,20 @@
 
 .notfound-container h2{
     color: #F8F9FA;
+    background-color: #c25c5c;
     font-size: 2em;
+    padding: 0.5em;
+    border-radius: 20px;
+    border: #8a5d5d 2px solid;
     margin-bottom: 0.5em;
+}
+
+.notfound-container p{
+    padding: 1em;
+    background-color: #2d4661;
+    border-radius: 20px;
+    font-size: 1.5em;
+    border: #252729 1px solid;
 }
 
 .notfound{
