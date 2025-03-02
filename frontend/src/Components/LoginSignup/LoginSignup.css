@@ -102,7 +102,7 @@
     width: 100%;
 }
 
-.submit{
+.submit-form{
     background-color: #04AA6D;
     color: #F8F9FA;
     padding: 0.5em 2.5em;
@@ -114,7 +114,7 @@
     transition: background-color 0.5s;
 }
 
-.submit:hover{
+.submit-form:hover{
     background-color: #439c7b;
 }
 

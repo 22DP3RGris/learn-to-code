@@ -72,7 +72,7 @@ function Login() {
                     </div>} 
                     <div className="tip">Don’t Have An Account?<span onClick={handleDontHaveAnAccountClick}> Sign Up</span></div>
                     <div className="sumbit-container">
-                        <button type="submit" className="submit">Login</button>
+                        <button type="submit" className="submit-form">Login</button>
                     </div>
                 </form>
             </div> 
