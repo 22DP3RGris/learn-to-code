@@ -14,8 +14,7 @@ function Profile() {
     useEffect(() => {
         axiosClient.get('/user')
           .then(({ data }) => {
-            setUser(data);
-            console.log(data);
+            setUser(data);;
             setLoading(false);
           })
     }, []);

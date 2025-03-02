@@ -7,6 +7,7 @@ import GuestLayout from './Layouts/GuestLayout.jsx';
 import Profile from './Components/Profile/Profile.jsx';
 import News from './Components/News/News.jsx';
 import ProgrammingLanguages from './Components/Education/ProgrammingLanguages/ProgrammingLanguages.jsx';
+import CodeEditor from './Components/Education/CodeEditor/CodeEditor.jsx';
 
 const router = createBrowserRouter([
     {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
             {
                 path: '/programming-languages',
                 element: <ProgrammingLanguages/>
+            },
+            {
+                path: '/code-editor',
+                element: <CodeEditor/>
             },
             {
                 path: '/',

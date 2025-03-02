@@ -10,6 +10,7 @@
     height: 6em;
     justify-content: space-between;
     background-color: #142639;
+    border-bottom: #72808f solid 1px;
 }
 
 .logo {

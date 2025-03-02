@@ -11,7 +11,7 @@ function ProgrammingLanguages() {
         return <Navigate to="/login"/>;
     }
     return (
-        <div className="news">
+        <div className="programming-languages">
             <Header/>
             <div className="content">
                 <SidePanel/>

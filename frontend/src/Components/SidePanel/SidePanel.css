@@ -42,6 +42,8 @@ aside {
 
 .side-panel-item-icon {
     font-size: 2em;
+    width: 1em;
+    height: auto;
     margin-right: 0.5em;
 }
 

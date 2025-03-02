@@ -1,7 +1,7 @@
 import './SidePanel.css';
 import React, { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight, faBook, faScrewdriverWrench} from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faBook, faScrewdriverWrench, faNewspaper, faCode} from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 
 function SidePanel() {
@@ -29,21 +29,17 @@ function SidePanel() {
                 {!isHidden && (
                     <aside>
                         <ul ref={sidePanelListRef} className='side-panel-list'>
+                            <li className='side-panel-item' onClick={() => handleNavigation('/')}>
+                                <FontAwesomeIcon icon={faNewspaper} className='side-panel-item-icon'/>
+                                <div className='side-panel-item-title'>JAUNUMI</div>
+                            </li>
                             <li className='side-panel-item' onClick={() => handleNavigation('/programming-languages')}>
                                 <FontAwesomeIcon icon={faBook} className='side-panel-item-icon'/>
                                 <div className='side-panel-item-title'>TEORIJA</div>
                             </li>
-                            <li className='side-panel-item'>
-                                <FontAwesomeIcon icon={faScrewdriverWrench} className='side-panel-item-icon'/>
-                                <div className='side-panel-item-title'>WORK IN PROGRESS</div>
-                            </li>
-                            <li className='side-panel-item'>
-                                <FontAwesomeIcon icon={faScrewdriverWrench} className='side-panel-item-icon'/>
-                                <div className='side-panel-item-title'>WORK IN PROGRESS</div>
-                            </li>
-                            <li className='side-panel-item'>
-                                <FontAwesomeIcon icon={faScrewdriverWrench} className='side-panel-item-icon'/>
-                                <div className='side-panel-item-title'>WORK IN PROGRESS</div>
+                            <li className='side-panel-item' onClick={() => handleNavigation('/code-editor')}>
+                                <FontAwesomeIcon icon={faCode} className='side-panel-item-icon'/>
+                                <div className='side-panel-item-title'>CODE EDITOR</div>
                             </li>
                         </ul>
                     </aside>

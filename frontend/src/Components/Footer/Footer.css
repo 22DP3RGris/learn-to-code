@@ -11,6 +11,7 @@ footer{
     position: static;
     padding: 2em;
     z-index: 20;
+    border-top: #72808f solid 1px;
 }
 
 footer p{
