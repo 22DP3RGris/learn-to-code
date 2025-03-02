@@ -5,10 +5,12 @@ import './CodeEditor.css';
 import Header from '../../Header/Header.jsx';
 import SidePanel from "../../SidePanel/SidePanel.jsx";
 import Editor from "@monaco-editor/react";
+import axiosClient from "../../../axios-client.js";
 
 function CodeEditor() {
     const {user, token} = useStateContext();
     const [code, setCode] = useState();
+    const [output, setOutput] = useState("");
     const [language, setLanguage] = useState('python');
     if (!token){
         return <Navigate to="/login"/>;
@@ -17,6 +19,17 @@ function CodeEditor() {
     const handleLanguageChange = (event) => {
         console.log(event.target.value);
         setLanguage(event.target.value);
+    };
+
+    const runCode = async () => {
+        const payload = { code, language };
+        axiosClient.post("/run-code", payload)
+            .then(({ data }) => {
+                setOutput(data.output);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
     
     return (
@@ -28,7 +41,7 @@ function CodeEditor() {
                     <div className="container">
                         <Editor
                             className="editor"
-                            height="90%"
+                            height="65vh"
                             language={language}
                             theme="vs-dark"
                             value={code}
@@ -56,9 +69,13 @@ function CodeEditor() {
                                 <option value="java">Java</option>
                             </select>
                             <button className="clear btn">CLEAR</button>
-                            <button className="run btn">RUN</button>
-                            <button className="submit btn">SUBMIT</button> 
-                        </div>        
+                            <button className="run btn" onClick={runCode}>RUN</button>
+                            <button className="submit btn">SUBMIT</button>
+                        </div>
+                        <div className="output">
+                            <h3>Rezultāts:</h3>
+                            <pre>{output}</pre>      
+                        </div>   
                     </div>
                 </div>
             </div>

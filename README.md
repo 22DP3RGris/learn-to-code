@@ -45,7 +45,7 @@ veidošana;
 ![image](/frontend/public/404-logged.png)
 - [x] Dizains tiek pārveidots par responsīvu dažādās ierīcēs;
 ![image](/frontend/public/Phoneview.png)
-- [ ] Iesākts koda editors, pagaidām nevar palaist kodu, bet tiek atpazītas vairākas valodas.
+- [ ] Iesākts koda editors, pagaidām slikta drošība, bet strādā vairākās valodās.
 ![image](/frontend/public/Code-editor.png)
 - [ ] Galvenā lapa, vienlaikus jaunumu sadaļa (News) !!! IZSTRĀDES PROCESĀ
 - [ ] Pirmā teorija sadaļa par Python pamatiem !!! TIEK PLĀNOTS IZSKATS UN DATUBĀZES STRUKTŪRA
