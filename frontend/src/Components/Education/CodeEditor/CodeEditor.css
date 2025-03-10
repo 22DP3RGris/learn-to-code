@@ -48,9 +48,10 @@
 
 .editor{
     border: solid 4px #2c7d9b;
+    zoom: 1.2;
 }
 
-.options{
+.language-options{
     display: flex;
     justify-content:flex-end;
     width: 100%;
