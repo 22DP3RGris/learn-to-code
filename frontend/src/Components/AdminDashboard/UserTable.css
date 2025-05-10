@@ -1,0 +1,254 @@
+.user-table {
+    width: 100%;
+    max-width: 1200px;
+    margin: 3em auto;
+    padding: 2em;
+    background-color: #395a7d;
+    border: 5px solid #252729;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(70, 117, 164, 0.6);
+    animation: container-glow 2s infinite alternate;
+    overflow-x: auto;
+}
+
+@keyframes container-glow {
+    from {
+        box-shadow: 0 0 0px 0px #4675a4;
+    }
+    to {
+        box-shadow: 0 0 10px 10px #4675a4;
+    }
+}
+
+.dashboard-header {
+    background-color: #2f4b6b;
+    text-align: center;
+    border-radius: 12px;
+    border: 2px solid #252729;
+    padding: 1.2em;
+    margin-bottom: 1.5em;
+    color: #F8F9FA;
+}
+
+.dashboard-header h2 {
+    font-size: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+}
+
+.user-table table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #F8F9FA;
+    font-size: 1em;
+}
+
+.user-table th, .user-table td {
+    padding: 1em;
+    border: 1px solid #252729;
+    text-align: left;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.user-table th {
+    background-color: #3b5076;
+    color: #ffffff;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.user-table th.active {
+    background-color: #5078a5;
+}
+
+.user-table th:hover:not(.active) {
+    background-color: #2f4b6b;
+    color: #c7d3e3;
+}
+
+.user-table tr:nth-child(even) {
+    background-color: #2f4b6b;
+}
+
+.user-table tr:hover {
+    background-color: #4b6e95;
+}
+
+
+.user-table button {
+    margin: 0 0.2em;
+    background-color: #2a3343;
+    color: #F8F9FA;
+    padding: 0.4em 0.8em;
+    font-size: 0.95em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.user-table button:hover {
+    background-color: #1f2a3a;
+}
+
+.edit-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #395a7d;
+    padding: 2em;
+    width: 400px;
+    border-radius: 10px;
+    border: 3px solid #252729;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    color: #F8F9FA;
+}
+
+.modal-content h3 {
+    margin-bottom: 1em;
+    font-size: 1.4em;
+    text-align: center;
+    color: #ffffff;
+}
+
+.modal-content label {
+    display: block;
+    margin-top: 1em;
+    font-size: 1em;
+    color: #ffffff;
+}
+
+.modal-content input,
+.modal-content select {
+    width: 100%;
+    margin-top: 0.5em;
+    padding: 10px;
+    border: 1px solid #252729;
+    border-radius: 4px;
+    background-color: #2f4b6b;
+    color: #F8F9FA;
+    font-size: 1em;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.modal-content input:focus,
+.modal-content select:focus {
+    background-color: #3b5076;
+    border-color: #5078a5;
+    outline: none;
+}
+
+.modal-content button {
+    margin-top: 1.5em;
+    margin-right: 0.5em;
+    padding: 0.5em 1.2em;
+    background-color: #2a3343;
+    color: #F8F9FA;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+.modal-content button:hover {
+    background-color: #1f2a3a;
+}
+
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5em;
+    background-color: #2f4b6b;
+    padding: 1em;
+    border-radius: 12px;
+    border: 2px solid #252729;
+    color: #F8F9FA;
+}
+
+.filter-bar input,
+.filter-bar select {
+    padding: 0.6em;
+    border: 1px solid #252729;
+    border-radius: 6px;
+    background-color: #395a7d;
+    color: #F8F9FA;
+    font-size: 1em;
+    flex: 1;
+    min-width: 150px;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.filter-bar input::placeholder{
+    color: #ffffff;
+    opacity: 0.8;
+}
+
+.filter-bar input:focus,
+.filter-bar select:focus {
+    background-color: #3b5076;
+    border-color: #5078a5;
+    outline: none;
+}
+
+.filter-bar button {
+    background-color: #2a3343;
+    color: #F8F9FA;
+    border: none;
+    padding: 0.6em 1.2em;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 1em;
+}
+
+.filter-bar button:hover {
+    background-color: #1f2a3a;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .user-table table {
+        font-size: 0.9em;
+        min-width: 600px;
+    }
+
+    .user-table th,
+    .user-table td {
+        padding: 0.6em;
+    }
+
+    .dashboard-header h2 {
+        font-size: 1.2em;
+    }
+
+    .filter-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.8em;
+    }
+
+    .filter-bar input,
+    .filter-bar select {
+        width: 100%;
+    }
+}

@@ -8,6 +8,7 @@ import Profile from './Components/Profile/Profile.jsx';
 import News from './Components/News/News.jsx';
 import ProgrammingLanguages from './Components/Education/ProgrammingLanguages/ProgrammingLanguages.jsx';
 import CodeEditor from './Components/Education/CodeEditor/CodeEditor.jsx';
+import AdminDashboard from './Components/AdminDashboard/AdminDashboard.jsx';
 
 const router = createBrowserRouter([
     {
@@ -27,9 +28,13 @@ const router = createBrowserRouter([
                 element: <CodeEditor/>
             },
             {
+                path: '/admin-dashboard',
+                element: <AdminDashboard/>
+            },
+            {
                 path: '/',
                 element: <News/>
-            },
+            }, 
         ]
     },
     {

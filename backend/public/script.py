@@ -1,1 +1,2 @@
-print (34)
+for i in range(52):
+    print(i)

@@ -31,11 +31,11 @@ function SidePanel() {
                         <ul ref={sidePanelListRef} className='side-panel-list'>
                             <li className='side-panel-item' onClick={() => handleNavigation('/')}>
                                 <FontAwesomeIcon icon={faNewspaper} className='side-panel-item-icon'/>
-                                <div className='side-panel-item-title'>JAUNUMI</div>
+                                <div className='side-panel-item-title'>NEWS</div>
                             </li>
                             <li className='side-panel-item' onClick={() => handleNavigation('/programming-languages')}>
                                 <FontAwesomeIcon icon={faBook} className='side-panel-item-icon'/>
-                                <div className='side-panel-item-title'>TEORIJA</div>
+                                <div className='side-panel-item-title'>LEARN</div>
                             </li>
                             <li className='side-panel-item' onClick={() => handleNavigation('/code-editor')}>
                                 <FontAwesomeIcon icon={faCode} className='side-panel-item-icon'/>

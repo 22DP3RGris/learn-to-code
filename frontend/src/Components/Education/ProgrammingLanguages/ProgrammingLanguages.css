@@ -1,6 +1,74 @@
-.programming-languages{
+.programming-languages {
     display: flex;
-    height: 100vh;
     flex-direction: column;
+    min-height: 100vh;
+    color: #F8F9FA;
+}
+
+.choose-language{
+    font-size: 1.2em;
+    color: #2c7d9b;
+    background-color: #c25c5c;
+    border: #8a5d5d 2px solid;
+    padding: 1em;
+    border-radius: 10px;
+    margin-top: 1em;
+}
+
+.language-list {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 20px;
+}
+
+.language-list ul {
+    list-style-type: none;
+    padding: 3em;
+}
+
+.language-list .language-item {
+    display: flex;
     align-items: center;
+    padding: 1em;
+    border: 1px solid #252729;    
+    border-bottom: none; 
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s; 
+}
+
+.language-list .language-item img {
+    margin-right: 1em;
+    background-color: #9cccdb;
+    border: #252729 2px solid;
+    padding: 0.2em;
+    width: 0.4em; 
+    height: 0.4em; 
+    object-fit: contain;
+}
+
+
+.language-list .language-item:nth-child(odd) {
+    background-color: #2f4b6b; 
+}
+
+.language-list .language-item:nth-child(even) {
+    background-color: #395a7d; 
+}
+
+.language-list .language-item:hover {
+    background-color: #49bd79;
+    transform: scale(1.05); 
+}
+
+.language-list span {
+    font-size: 1.2em;
+    color: #F8F9FA;
+}
+
+.language-list p {
+    text-align: center;
+    font-size: 1.2em;
+    color: #ffffff;
 }

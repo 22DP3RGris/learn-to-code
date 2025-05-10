@@ -10,7 +10,7 @@
     height: 6em;
     justify-content: space-between;
     background-color: #142639;
-    border-bottom: #72808f solid 1px;
+    border-bottom: #101e2d solid 1px;
 }
 
 .logo {
@@ -47,6 +47,7 @@ h1{
 }
 
 .navbar ul{
+    display: flex;
     height: 100%;
     list-style: none;
     padding: 0;

@@ -60,13 +60,13 @@ aside {
 }
 
 .side-panel-btn {
+    position: fixed;
     background: #274565;
     border-radius: 1em;
     border: #142639 2px solid;
     width: 4em;
     height: 4em;
-    position: absolute;
-    bottom: 1em;
+    bottom: 5em;
     left: 1em;
     cursor: pointer;
     display: flex;

@@ -13,22 +13,22 @@ function News() {
                 <SidePanel/>
                 <div className="main-container">
                     <div className="container">
-                        <h2>JAUNUMI !!</h2>
+                        <h2>NEWS !!</h2>
                         <div className="news-container">
                             <div className="news-item">
-                                <h3>Teorijas sadaļas izstrāde</h3>
+                                <h3>Work in progress</h3>
                                 <p>Work in progress</p>
                             </div>
                             <div className="news-item">
-                                <h3>Teorētisko uzdevumu izstrāde</h3>
+                                <h3>Work in progress</h3>
                                 <p>Work in progress</p>
                             </div>
                             <div className="news-item">
-                                <h3>Praktisko uzdevumu izstrāde</h3>
+                                <h3>Work in progress</h3>
                                 <p>Work in progress</p>
                             </div>
                             <div className="news-item">
-                                <h3>Reitinga sadaļas izstrāde</h3>
+                                <h3>Work in progress</h3>
                                 <p>Work in progress</p>
                             </div>
                         </div>

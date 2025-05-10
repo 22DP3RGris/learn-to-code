@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import './LoginSignup.css';
 import { useNavigate} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faLock, faPhone, faEnvelope, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faLock, faPhone, faEnvelope, faCheck, faUserGraduate } from '@fortawesome/free-solid-svg-icons';
 import Header from '../Header/Header.jsx';
 import axiosClient from "../../axios-client.js";
 import { useStateContext } from "../../contexts/ContextProvider.jsx";
@@ -20,6 +20,7 @@ function Signup() {
     const phoneRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
+    const [role, setRole] = useState("student");
     const [errors, setErrors] = useState(null);
 
     const handleSubmit = (e) => {
@@ -32,7 +33,7 @@ function Signup() {
 
         setErrors(null);
 
-        const payload = { username, email, phone, password, password_confirmation: passwordConfirm };
+        const payload = { username, email, phone, password, password_confirmation: passwordConfirm, role };
         
         axiosClient.post('/signup', payload)
             .then(({ data }) => {
@@ -74,6 +75,13 @@ function Signup() {
                         <div className="input">
                             <FontAwesomeIcon icon={faCheck} className="form-icon"/>
                             <input ref={passwordConfirmRef} type="password" placeholder="Password Confirmation"/>
+                        </div>
+                        <div className="input">
+                            <FontAwesomeIcon icon={faUserGraduate} className="form-icon" />
+                            <select value={role} onChange={(e) => setRole(e.target.value)}>
+                                <option value="student">Student</option>
+                                <option value="teacher">Teacher</option>
+                            </select>
                         </div>
                     </div>
                     {errors && <div className="alerts">

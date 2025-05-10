@@ -1,43 +1,55 @@
 import './Header.css';
-import React, { useEffect } from "react";
-import Logo from '../../assets/LTC-LOGO.png';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faBars, faRightToBracket} from '@fortawesome/free-solid-svg-icons';
+import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faBars, faRightToBracket, faTachographDigital } from '@fortawesome/free-solid-svg-icons';
+
+import Logo from '../../assets/LTC-LOGO.png';
 import { useStateContext } from '../../contexts/ContextProvider';
 
 function Header({ page }) {
     const navigate = useNavigate();
-    const [currentPage, setCurrentPage] = React.useState(page || "LEARN TO CODE");
-    const {user, token} = useStateContext();
+    const [currentPage, setCurrentPage] = useState(page || "LEARN TO CODE");
+    const { user, token } = useStateContext();
 
     useEffect(() => {
         setCurrentPage(page || "LEARN TO CODE");
     }, [page]);
 
+    const handleNavigation = (path) => navigate(path);
+
+    const isAuthPage = page === 'LOGGING IN' || page === 'REGISTRATION';
 
     return (
         <header className="header">
-            <div className="logo">
-                <img src={Logo} alt="Logo" onClick={() => navigate('/')}/>
+            <div className="logo" onClick={() => handleNavigation('/')}>
+                <img src={Logo} alt="Logo" />
                 <h1>{currentPage}</h1>
             </div>
+
             <nav className="navbar">
                 <ul>
-                    {page !== 'LOGGING IN' && page !== 'REGISTRATION' && (
+                    {!isAuthPage && (
                         token ? (
-                            <li onClick={() => navigate('/profile')}>
-                                <a><FontAwesomeIcon icon={faUser} className='nav-icon' /></a>
-                            </li>
+                            <>
+                                {user?.role === 'admin' && (
+                                    <li onClick={() => handleNavigation('/admin-dashboard')}>
+                                        <FontAwesomeIcon icon={faTachographDigital} className="nav-icon" />
+                                    </li>
+                                )}
+                                <li onClick={() => handleNavigation('/profile')}>
+                                    <FontAwesomeIcon icon={faUser} className="nav-icon" />
+                                </li>
+                            </>
                         ) : (
-                            <li onClick={() => navigate('/login')}>
-                                <a><FontAwesomeIcon icon={faRightToBracket} className='nav-icon' /></a>
+                            <li onClick={() => handleNavigation('/login')}>
+                                <FontAwesomeIcon icon={faRightToBracket} className="nav-icon" />
                             </li>
                         )
                     )}
                 </ul>
-                <div className='ham-menu'>
-                    <FontAwesomeIcon icon={faBars} className='ham-icon'/>
+                <div className="ham-menu">
+                    <FontAwesomeIcon icon={faBars} className="ham-icon" />
                 </div>
             </nav>
         </header>
