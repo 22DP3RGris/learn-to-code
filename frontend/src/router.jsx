@@ -11,7 +11,7 @@ import Topics from './Components/Education/Topics/Topics.jsx';
 import Theory from './Components/Education/Theory/Theory.jsx';
 import CodeEditor from './Components/Education/CodeEditor/CodeEditor.jsx';
 import AdminDashboard from './Components/AdminDashboard/AdminDashboard.jsx';
-
+import TopicQuestions from "./Components/Education/Topics/TopicQuestions.jsx";
 
 const router = createBrowserRouter([
     {
@@ -41,6 +41,10 @@ const router = createBrowserRouter([
             {
                 path: '/admin-dashboard',
                 element: <AdminDashboard/>
+            },
+            {
+                path: "/topics/:topicId/questions/:questionPage", 
+                element: <TopicQuestions/>
             },
             {
                 path: '/',

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axiosClient from "../../../axios-client";
 import Header from "../../Header/Header";
 import SidePanel from "../../SidePanel/SidePanel";
@@ -13,6 +13,7 @@ import "./Theory.css";
 
 function Theory() {
     const { topicId } = useParams();
+    const navigate = useNavigate();
     const { user } = useStateContext();
     const canEdit = user?.role === "teacher" || user?.role === "admin";
 
@@ -21,6 +22,7 @@ function Theory() {
     const [loading, setLoading] = useState(true);
     const [editMode, setEditMode] = useState(false);
     const [editedContent, setEditedContent] = useState("");
+    const [questions, setQuestions] = useState([]);
 
     const fetchTheory = async () => {
         setLoading(true);
@@ -44,6 +46,16 @@ function Theory() {
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     }, [currentPage]);
+
+    useEffect(() => {
+        if (theoryPages.current_page === theoryPages.last_page) {
+            axiosClient.get(`/theory/${topicId}/questions`)
+                .then(({ data }) => setQuestions(data))
+                .catch((err) => console.error("Failed to load questions:", err));
+        } else {
+            setQuestions([]);
+        }
+    }, [topicId, theoryPages]);
 
     const goToNext = () => {
         if (theoryPages.current_page < theoryPages.last_page) {
@@ -87,14 +99,12 @@ function Theory() {
                                     <h2>{theory.title}</h2>
 
                                     {editMode ? (
-                                        <div>
-                                            <textarea
-                                                value={editedContent}
-                                                onChange={(e) => setEditedContent(e.target.value)}
-                                                rows={20}
-                                                className="edit-textarea"
-                                            />
-                                        </div>
+                                        <textarea
+                                            value={editedContent}
+                                            onChange={(e) => setEditedContent(e.target.value)}
+                                            rows={20}
+                                            className="edit-textarea"
+                                        />
                                     ) : (
                                         <div className="markdown-body">
                                             <ReactMarkdown
@@ -109,42 +119,27 @@ function Theory() {
                                         <div className="edit-buttons">
                                             {editMode ? (
                                                 <>
-                                                    <button className="edit-button" onClick={handleSave}>
-                                                        Save
-                                                    </button>
-                                                    <button
-                                                        className="edit-button cancel-button"
-                                                        onClick={() => setEditMode(false)}
-                                                    >
-                                                        Cancel
-                                                    </button>
+                                                    <button className="edit-button" onClick={handleSave}>Save</button>
+                                                    <button className="edit-button cancel-button" onClick={() => setEditMode(false)}>Cancel</button>
                                                 </>
                                             ) : (
                                                 canEdit && (
-                                                    <button
-                                                        className="edit-button"
-                                                        onClick={() => setEditMode(true)}
-                                                    >
-                                                        Edit
-                                                    </button>
+                                                    <button className="edit-button" onClick={() => setEditMode(true)}>Edit</button>
                                                 )
                                             )}
                                         </div>
-
                                         <div className="pagination">
-                                            <button onClick={goToPrev} disabled={currentPage === 1}>
-                                                Previous
-                                            </button>
-                                            <span>
-                                                Page {theoryPages.current_page} of {theoryPages.last_page}
-                                            </span>
-                                            <button
-                                                onClick={goToNext}
-                                                disabled={currentPage === theoryPages.last_page}
-                                            >
-                                                Next
-                                            </button>
+                                            <button onClick={goToPrev} disabled={currentPage === 1}>Previous</button>
+                                            <span>Page {theoryPages.current_page} of {theoryPages.last_page}</span>
+                                            <button onClick={goToNext} disabled={currentPage === theoryPages.last_page}>Next</button>
+
                                         </div>
+                                        <button
+                                            className="edit-button"
+                                            onClick={() => navigate(`/topics/${topicId}/questions/1`)}
+                                        >
+                                            Go to Questions
+                                        </button>
                                     </div>
                                 </div>
                             ) : (

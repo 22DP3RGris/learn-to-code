@@ -7,6 +7,8 @@ use App\Http\Controllers\Api\ProgrammingLanguageController;
 use App\Http\Controllers\Api\ProgrammingTopicController;
 use App\Http\Controllers\Api\TheoryController;
 use App\Http\Controllers\Api\TheoryChangeRequestController; 
+use App\Http\Controllers\Api\ProgrammingQuestionController;
+use App\Http\Controllers\Api\ProgrammingAnswerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,3 +34,6 @@ Route::post('/theory/{id}/change-request', [TheoryChangeRequestController::class
 Route::put('/theory-change-requests/{id}/approve', [TheoryChangeRequestController::class, 'approve'])->middleware('auth:sanctum'); 
 Route::delete('/theory-change-requests/{id}/reject', [TheoryChangeRequestController::class, 'reject'])->middleware('auth:sanctum');
 Route::get('/theory-change-requests', [TheoryChangeRequestController::class, 'index'])->middleware('auth:sanctum'); 
+Route::get('/topics/{topic}/questions', [ProgrammingQuestionController::class, 'paginated']);
+Route::post('/questions/{question}/submit', [ProgrammingAnswerController::class, 'submit'])->middleware('auth:sanctum');
+Route::get('/questions/{questionId}/submission-status', [ProgrammingAnswerController::class, 'getSubmissionStatus'])->middleware('auth:sanctum');
