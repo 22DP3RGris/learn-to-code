@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useStateContext } from "../../../contexts/ContextProvider";
 import axiosClient from "../../../axios-client.js";
 import './ProgrammingLanguages.css';
+import Loading from "../../Loading/Loading.jsx";
 import Header from '../../Header/Header.jsx';
 import SidePanel from "../../SidePanel/SidePanel.jsx";
 
@@ -10,22 +11,18 @@ function ProgrammingLanguages() {
     const { user, token } = useStateContext();
     const [languages, setLanguages] = useState([]);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         axiosClient.get('/programming-languages')
             .then(({ data }) => {
                 setLanguages(data);
                 setLoading(false);
-                languages.forEach(language => console.log(language));
             })
             .catch(error => {
                 setLoading(false);
             });
     }, []);
-
-    if (!token) {
-        return <Navigate to="/login" />;
-    }
 
     return (
         <div className="programming-languages">
@@ -33,16 +30,23 @@ function ProgrammingLanguages() {
             <div className="content">
                 <SidePanel />
                 <div className="main-container">
-                    <div className="choose-language">
-                        <h1>Choose a programming language</h1>
-                    </div>
                     <div className="language-list">
                         {loading ? (
-                            <p>Loading...</p>
+                            <Loading />
                         ) : (
-                            <ul>
+                            <ul className="container">
+                                <div className="choose-language">
+                                    <h1>Choose a programming language</h1>
+                                </div>
                                 {languages.map((language) => (
-                                    <li key={language.id} className="language-item">
+                                    <li
+                                        key={language.id}
+                                        className="language-item"
+                                        onClick={() => {
+                                            navigate(`/language/${language.name}/topics`);
+                                        }}
+
+                                    >
                                         <img
                                             src={language.image}
                                             alt={language.name}

@@ -1,0 +1,184 @@
+@import "highlight.js/styles/vs2015.css";
+
+.theory-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    color: #F8F9FA;
+}
+
+.action-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1em;
+    margin-top: 2em;
+    padding-top: 1em;
+    border-top: 1px solid #a9cdf2;
+}
+
+.edit-textarea {
+    width: 100%;
+    min-height: 300px;
+    padding: 1em;
+    font-size: 1em;
+    border-radius: 8px;
+    border: 1px solid #a9cdf2;
+    background-color: #1e2a38;
+    color: #fff;
+    resize: vertical;
+    font-family: 'Source Code Pro', monospace;
+    margin-bottom: 1em;
+}
+
+.edit-buttons {
+    display: flex;
+    gap: 1em;
+}
+
+.edit-button {
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    background-color: #4c84b3;
+    color: #fff;
+    border: 1px solid #a9cdf2;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.edit-button:hover {
+    background-color: #3a6a99;
+}
+
+.cancel-button {
+    background-color: #a94442;
+    border-color: #e4b1af;
+}
+
+.cancel-button:hover {
+    background-color: #8d2e2c;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+.pagination button {
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    background-color: #2f4b6b;
+    color: #ffffff;
+    border: 1px solid #a9cdf2;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.pagination button:hover:not(:disabled) {
+    background-color: #2c3d5a;
+    transform: scale(1.05);
+}
+
+.pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pagination span {
+    font-size: 1.2em;
+    color: #f0f0f0;
+}
+
+.markdown-body {
+    background-color: #2f4b6b;
+    color: #ffffff;
+    padding: 2em;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 100%;
+    font-size: 1.1em;
+    line-height: 1.7;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    overflow-x: auto;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.markdown-body pre {
+    background-color: #1e2a38;
+    color: #ffffff;
+    padding: 1em;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.95em;
+}
+
+.markdown-body code {
+    background-color: #3d5a80;
+    color: #f5b041;
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.95em;
+}
+
+.markdown-body pre code {
+    background-color: transparent;
+    color: inherit;
+    padding: 0;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3 {
+    border-bottom: 1px solid #a9cdf2;
+    padding-bottom: 0.3em;
+    margin-top: 1.5em;
+    color: #a9cdf2;
+}
+
+.markdown-body h1 {
+    margin: 0em;
+    padding-bottom: 0.1em;
+    margin-bottom: 0.5em;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+    padding-left: 2em;
+}
+
+.markdown-body ul {
+    list-style-type: disc;
+}
+
+.markdown-body ol {
+    list-style-type: decimal;
+}
+
+.markdown-body table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 1em;
+    background-color: #395a7d;
+    color: #ffffff;
+}
+
+.markdown-body th,
+.markdown-body td {
+    border: 1px solid #a9cdf2;
+    padding: 0.6em 1em;
+    text-align: left;
+}
+
+.markdown-body blockquote {
+    border-left: 4px solid #a9cdf2;
+    padding-left: 1em;
+    color: #e0e0e0;
+    margin: 1em 0;
+    font-style: italic;
+}

@@ -46,24 +46,38 @@ class UserController extends Controller
     }
 
     public function updateUser(Request $request, $id)
-{
-    if ($request->user()->role !== 'admin') {
-        return response()->json(['message' => 'Unauthorized'], 403);
+    {
+        if ($request->user()->role !== 'admin') {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
+
+        $user = User::findOrFail($id);
+
+        $rules = [];
+
+        if ($request->has('username')) {
+            $rules['username'] = ['required', 'string', 'max:55', 'regex:/^(?=.*[A-Za-z])[A-Za-z0-9\s]+$/'];
+        }
+        if ($request->has('email')) {
+            $rules['email'] = 'required|email|unique:users,email,' . $id;
+        }
+        if ($request->has('phone')) {
+            $rules['phone'] = 'required|nullable|string|max:20';
+        }
+        if ($request->has('role')) {
+            $rules['role'] = 'required|string';
+        }
+        if ($request->has('rating')) {
+            $rules['rating'] = 'required|nullable|numeric|between:0.00,999999.99';
+        }
+
+        $validated = $request->validate($rules);
+
+        $user->update($validated);
+
+        return response()->json($user);
     }
 
-    $user = User::findOrFail($id);
-
-    $validated = $request->validate([
-        'username' => 'required|string|max:255',
-        'email' => 'required|email|unique:users,email,' . $id,
-        'phone' => 'nullable|string|max:20',
-        'role' => 'required|string'
-    ]);
-
-    $user->update($validated);
-
-    return response()->json($user);
-}
 
     public function destroy($id)
     {

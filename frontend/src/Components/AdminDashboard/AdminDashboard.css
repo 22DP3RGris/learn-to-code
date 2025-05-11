@@ -4,3 +4,41 @@
     flex-direction: column;
     align-items: center
 }
+
+.view-selector {
+    margin-top: 2em;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #2f4b6b;
+    padding: 1em;
+    border-radius: 12px;
+    border: 5px solid #252729;
+    display: flex;
+    align-items: center;
+    gap: 0.8em;
+    color: #F8F9FA;
+    font-size: 1em;
+}
+
+.view-selector label {
+    font-weight: 600;
+    font-size: 1em;
+    color: #ffffff;
+}
+
+.view-selector select {
+    padding: 0.6em 1em;
+    border-radius: 6px;
+    background-color: #395a7d;
+    color: #F8F9FA;
+    border: 1px solid #252729;
+    font-size: 1em;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.view-selector select:focus {
+    outline: none;
+    background-color: #3b5076;
+    border-color: #5078a5;
+}

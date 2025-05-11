@@ -7,8 +7,11 @@ import GuestLayout from './Layouts/GuestLayout.jsx';
 import Profile from './Components/Profile/Profile.jsx';
 import News from './Components/News/News.jsx';
 import ProgrammingLanguages from './Components/Education/ProgrammingLanguages/ProgrammingLanguages.jsx';
+import Topics from './Components/Education/Topics/Topics.jsx';
+import Theory from './Components/Education/Theory/Theory.jsx';
 import CodeEditor from './Components/Education/CodeEditor/CodeEditor.jsx';
 import AdminDashboard from './Components/AdminDashboard/AdminDashboard.jsx';
+
 
 const router = createBrowserRouter([
     {
@@ -23,6 +26,14 @@ const router = createBrowserRouter([
                 path: '/programming-languages',
                 element: <ProgrammingLanguages/>
             },
+            {
+                path: '/language/:name/topics',
+                element: <Topics/>
+            },
+            {
+                path: '/topics/:topicId/theory',
+                element: <Theory/>
+            }, 
             {
                 path: '/code-editor',
                 element: <CodeEditor/>

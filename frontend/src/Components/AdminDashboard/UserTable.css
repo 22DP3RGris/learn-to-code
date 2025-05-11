@@ -40,13 +40,14 @@
 
 .user-table table {
     width: 100%;
-    border-collapse: collapse;
     color: #F8F9FA;
     font-size: 1em;
+    max-height: 200px;
 }
 
 .user-table th, .user-table td {
     padding: 1em;
+    
     border: 1px solid #252729;
     text-align: left;
     transition: background-color 0.3s, color 0.3s;
@@ -118,6 +119,10 @@
 
 .modal-content h3 {
     margin-bottom: 1em;
+    background-color: #2a3343;
+    padding: 0.5em;
+    border-radius: 8px;
+    border: 2px solid #252729;
     font-size: 1.4em;
     text-align: center;
     color: #ffffff;
@@ -153,6 +158,7 @@
 .modal-content button {
     margin-top: 1.5em;
     margin-right: 0.5em;
+    margin-left: 0;
     padding: 0.5em 1.2em;
     background-color: #2a3343;
     color: #F8F9FA;
@@ -165,6 +171,19 @@
 
 .modal-content button:hover {
     background-color: #1f2a3a;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 .filter-bar {
@@ -251,4 +270,19 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     .filter-bar select {
         width: 100%;
     }
+}
+
+.request-list{
+    width: 100%;
+}
+
+.request-list .message{
+    background-color: #2f4b6b;
+    color: #F8F9FA;
+    font-size: 1.4em;
+    padding: 1em;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 1em;
+    border: 2px solid #252729;
 }

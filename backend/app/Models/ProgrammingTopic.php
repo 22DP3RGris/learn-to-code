@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProgrammingLanguage extends Model
+class ProgrammingTopic extends Model
 {
     use HasFactory;
 
-    public function topics()
+    public function language()
     {
-        return $this->hasMany(ProgrammingTopic::class);
+        return $this->belongsTo(ProgrammingLanguage::class);
     }
 }

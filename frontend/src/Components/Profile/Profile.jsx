@@ -7,6 +7,7 @@ import axiosClient from "../../axios-client.js";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faEnvelope, faPhone, faUserGraduate, faLock, faCheck } from '@fortawesome/free-solid-svg-icons';
 import './Profile.css';
+import Loading from "../Loading/Loading.jsx";
 
 function Profile() {
     const { user, setUser, setToken } = useStateContext();
@@ -90,17 +91,17 @@ function Profile() {
                 navigate('/login');
             });
     };
-
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
     return (
         <div className="profile">
             <Header page="PROFILE" />
             <div className="content">
                 <SidePanel />
                 <div className="main-container">
+                    {loading ? (
+                        <div className="loading-screen">
+                            <Loading/>
+                        </div>
+                    ) : (
                     <div className="profile-container">
                         <h2>PROFILE</h2>
                         <div className="profile-info">
@@ -160,6 +161,7 @@ function Profile() {
                             <button onClick={handleLogout} className="logout">LOGOUT</button>
                         </div>
                     </div>
+                    )}
                 </div>
             </div>
         </div>

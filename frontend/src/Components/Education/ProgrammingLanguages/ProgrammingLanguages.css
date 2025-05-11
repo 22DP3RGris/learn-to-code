@@ -7,15 +7,19 @@
 
 .choose-language{
     font-size: 1.2em;
-    color: #2c7d9b;
+    color: #ffffff;
     background-color: #c25c5c;
     border: #8a5d5d 2px solid;
     padding: 1em;
     border-radius: 10px;
-    margin-top: 1em;
+    margin-bottom: 2em;
 }
 
 .language-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     max-width: 1000px;
     margin: 0 auto;
@@ -25,7 +29,6 @@
 
 .language-list ul {
     list-style-type: none;
-    padding: 3em;
 }
 
 .language-list .language-item {
@@ -50,11 +53,11 @@
 
 
 .language-list .language-item:nth-child(odd) {
-    background-color: #2f4b6b; 
+    background-color: #395a7d; 
 }
 
 .language-list .language-item:nth-child(even) {
-    background-color: #395a7d; 
+    background-color: #2f4b6b; 
 }
 
 .language-list .language-item:hover {

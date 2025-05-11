@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import axiosClient from "../../axios-client.js";
+import React, { useState } from 'react';
 import './UserTable.css';
+import axiosClient from "../../axios-client.js";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt, faUsers } from '@fortawesome/free-solid-svg-icons';
 
-function UserTable() {
-    const [users, setUsers] = useState([]);
+function UserTable({ users, setUsers }) {
     const [sortBy, setSortBy] = useState('username');
     const [sortOrder, setSortOrder] = useState('asc');
     const [activeColumn, setActiveColumn] = useState(null);
@@ -13,35 +12,18 @@ function UserTable() {
     const [filters, setFilters] = useState({
         search: '',
         role: '',
-        created_after: ''
+        created_on: ''
     });
 
     const [editedUserData, setEditedUserData] = useState({
         username: '',
         email: '',
         phone: '',
-        role: ''
+        role: '',
+        rating: ''
     });
 
-    const getTotalUsers = () => users.length;
-
-    const fetchUsers = async () => {
-        try {
-            const params = new URLSearchParams({
-                sortBy,
-                sortOrder,
-                ...filters
-            });
-            const response = await axiosClient.get(`/users-filter?${params}`);
-            setUsers(response.data);
-        } catch (error) {
-            console.error('Failed to fetch users:', error);
-        }
-    };
-
-    useEffect(() => {
-        fetchUsers();
-    }, [sortBy, sortOrder, filters]);
+    const [errorMessages, setErrorMessages] = useState({});  
 
     const toggleSortOrder = (field) => {
         const newOrder = (sortBy === field && sortOrder === 'asc') ? 'desc' : 'asc';
@@ -51,13 +33,12 @@ function UserTable() {
     };
 
     const handleDeleteUser = (userId) => {
-        const confirmed = window.confirm('Are you sure you want to delete this user?');
-        if (confirmed) {
+        if (window.confirm('Are you sure you want to delete this user?')) {
             axiosClient.delete(`/users/${userId}`)
                 .then(() => {
-                    setUsers(users.filter(user => user.id !== userId));
+                    setUsers(prev => prev.filter(user => user.id !== userId));
                 })
-                .catch((error) => {
+                .catch(error => {
                     console.error('Failed to delete user:', error);
                 });
         }
@@ -71,37 +52,57 @@ function UserTable() {
                 username: user.username,
                 email: user.email,
                 phone: user.phone,
-                role: user.role
+                role: user.role,
+                rating: user.rating
             });
         }
     };
 
     const handleSaveEdit = () => {
         axiosClient.put(`/users/${editingUser}`, editedUserData)
-            .then((response) => {
-                const updatedUser = response.data;
-                setUsers(users.map(user =>
-                    user.id === editingUser ? updatedUser : user
+            .then(({ data }) => {
+                setUsers(prev => prev.map(user =>
+                    user.id === editingUser ? data : user
                 ));
                 setEditingUser(null);
+                setErrorMessages({}); 
             })
             .catch((error) => {
-                console.error('Failed to update user:', error);
+                if (error.response && error.response.status === 422) {
+            
+                    setErrorMessages(error.response.data.errors);  
+                } else {
+                    console.error('Failed to update user:', error);
+                }
             });
     };
 
-    const formatDate = (dateString) => {
-        return new Date(dateString).toLocaleString('lv-LV', {
+    const formatDate = (dateString) =>
+        new Date(dateString).toLocaleString('lv-LV', {
             year: 'numeric',
             month: '2-digit',
             day: '2-digit',
         });
-    };
+
+    const filteredUsers = users
+        .filter(u =>
+            u.username.toLowerCase().includes(filters.search.toLowerCase()) ||
+            u.email.toLowerCase().includes(filters.search.toLowerCase())
+        )
+        .filter(u => (filters.role ? u.role === filters.role : true))
+        .filter(u => (filters.created_on ? u.created_at >= filters.created_on : true))
+        .sort((a, b) => {
+            const aValue = a[sortBy];
+            const bValue = b[sortBy];
+            if (aValue < bValue) return sortOrder === 'asc' ? -1 : 1;
+            if (aValue > bValue) return sortOrder === 'asc' ? 1 : -1;
+            return 0;
+        });
 
     return (
         <div className="user-table">
             <div className="dashboard-header">
-                <h2><FontAwesomeIcon icon={faUsers} className="icon" /> Filtered user count: {getTotalUsers()}</h2>
+                <h2><FontAwesomeIcon icon={faUsers} className="icon" /> Filtered user count: {filteredUsers.length}</h2>
             </div>
 
             <div className="filter-bar">
@@ -123,30 +124,31 @@ function UserTable() {
                 <input
                     type="date"
                     value={filters.created_on}
-                    onChange={(e) =>
-                        setFilters({ ...filters, created_on: e.target.value })
-                    }
+                    onChange={(e) => setFilters({ ...filters, created_on: e.target.value })}
                 />
             </div>
 
             <table>
                 <thead>
                     <tr>
-                        <th onClick={() => toggleSortOrder('username')} className={activeColumn === 'username' ? 'active' : ''}>Username</th>
-                        <th onClick={() => toggleSortOrder('email')} className={activeColumn === 'email' ? 'active' : ''}>Email</th>
-                        <th onClick={() => toggleSortOrder('phone')} className={activeColumn === 'phone' ? 'active' : ''}>Phone</th>
-                        <th onClick={() => toggleSortOrder('role')} className={activeColumn === 'role' ? 'active' : ''}>Role</th>
-                        <th onClick={() => toggleSortOrder('created_at')} className={activeColumn === 'created_at' ? 'active' : ''}>Created At</th>
+                        {['username', 'email', 'phone', 'role', 'rating', 'created_at'].map(field => (
+                            <th key={field}
+                                onClick={() => toggleSortOrder(field)}
+                                className={activeColumn === field ? 'active' : ''}>
+                                {field.charAt(0).toUpperCase() + field.slice(1).replace('_', ' ')}
+                            </th>
+                        ))}
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map((user) => (
+                    {filteredUsers.map(user => (
                         <tr key={user.id}>
                             <td>{user.username}</td>
                             <td>{user.email}</td>
                             <td>{user.phone}</td>
                             <td>{user.role}</td>
+                            <td>{user.rating}</td>
                             <td>{formatDate(user.created_at)}</td>
                             <td>
                                 <button onClick={() => handleEditUser(user.id)}><FontAwesomeIcon icon={faEdit} /></button>
@@ -164,14 +166,17 @@ function UserTable() {
                         <label>Username:
                             <input type="text" value={editedUserData.username}
                                    onChange={(e) => setEditedUserData({ ...editedUserData, username: e.target.value })} />
+                            {errorMessages.username && <div className="error-message">{errorMessages.username}</div>}
                         </label>
                         <label>Email:
                             <input type="email" value={editedUserData.email}
                                    onChange={(e) => setEditedUserData({ ...editedUserData, email: e.target.value })} />
+                            {errorMessages.email && <div className="error-message">{errorMessages.email}</div>}
                         </label>
                         <label>Phone:
                             <input type="text" value={editedUserData.phone}
                                    onChange={(e) => setEditedUserData({ ...editedUserData, phone: e.target.value })} />
+                            {errorMessages.phone && <div className="error-message">{errorMessages.phone}</div>}
                         </label>
                         <label>Role:
                             <select value={editedUserData.role}
@@ -181,6 +186,12 @@ function UserTable() {
                                 <option value="teacher">Teacher</option>
                                 <option value="student">Student</option>
                             </select>
+                            {errorMessages.role && <div className="error-message">{errorMessages.role}</div>}
+                        </label>
+                        <label>Rating:
+                            <input type="number" value={editedUserData.rating}
+                                   onChange={(e) => setEditedUserData({ ...editedUserData, rating: e.target.value })} />
+                            {errorMessages.rating && <div className="error-message">{errorMessages.rating}</div>}
                         </label>
                         <button onClick={handleSaveEdit}>Save Changes</button>
                         <button onClick={() => setEditingUser(null)}>Close</button>

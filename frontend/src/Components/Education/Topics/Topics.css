@@ -1,0 +1,129 @@
+.topics-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    color: #F8F9FA;
+}
+
+.choose-topic {
+    font-size: 1.5em;
+    color: #ffffff;
+    background-color: #c25c5c;
+    border: 2px solid #8a5d5d;
+    padding: 1.5em;
+    border-radius: 10px;
+    margin-bottom: 2em;
+    text-align: center;
+}
+
+.topics-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 20px;
+}
+
+.topics-list ul {
+    list-style-type: none;
+    padding: 2em;
+    margin: 2em 0;
+    width: 100%;
+}
+
+.topic-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1em;
+    border: 1px solid #252729;
+    border-bottom: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    background-color: #395a7d;
+}
+
+.topic-item:nth-child(even) {
+    background-color: #2f4b6b;
+}
+
+.topic-item:hover {
+    background-color: #2c3d5a;
+    transform: scale(1.05);
+}
+
+.topic-info {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.topic-description {
+    font-size: 1.2em;
+    width: 100%;
+    border-bottom: 1px solid #a9cdf2;
+    padding-bottom: 0.5em;
+    color: #ffffff;
+    margin-bottom: 1em;
+}
+
+.topic-difficulty,
+.topic-theory-size {
+    font-size: 1.2em;
+    width: 100%;
+    color: #e0c2ad;
+    margin-bottom: 5px;
+    font-style: italic;
+}
+
+.topic-theory-size {
+    border-bottom: 1px solid #a9cdf2;
+    padding-bottom: 1em;
+}
+
+.topic-difficulty {
+    font-weight: bold;
+}
+
+.topic-difficulty.beginner {
+    color: #27ae60;
+}
+
+.topic-difficulty.intermediate {
+    color: #f39c12;
+}
+
+.topic-difficulty.advanced {
+    color: #e74c3c;
+}
+
+.topic-difficulty.expert {
+    color: #8e44ad;
+}
+
+.topic-title {
+    text-align: center;
+    width: 100%;
+    border-bottom: 1px solid #a9cdf2;
+    color: #a9cdf2;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+
+
+@media (max-width: 768px) {
+    .topic-item {
+        padding: 0.8em;
+    }
+
+    .choose-topic {
+        font-size: 1.2em;
+        padding: 1em;
+    }
+}

@@ -10,8 +10,7 @@ const StateContext = createContext({
 export const ContextProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [token, _setToken] = useState(localStorage.getItem('ACCESS_TOKEN'));
-
-    // Load user from localStorage if available
+    
     useEffect(() => {
         const savedUser = localStorage.getItem('USER');
         if (savedUser) {
