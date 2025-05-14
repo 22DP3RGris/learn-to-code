@@ -9,6 +9,13 @@ class ProgrammingTopic extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',         
+        'description',     
+        'difficulty',    
+        'language_id',    
+    ];
+
     public function language()
     {
         return $this->belongsTo(ProgrammingLanguage::class);

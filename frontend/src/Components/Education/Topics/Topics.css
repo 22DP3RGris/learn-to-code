@@ -116,6 +116,18 @@
     margin-bottom: 0.5em;
 }
 
+.add-topic{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    font-size: 1.5em;
+    padding: 1em;
+    border-radius: 10px;
+    margin-top: 1em;
+    cursor: pointer;
+}
+
 
 @media (max-width: 768px) {
     .topic-item {
@@ -126,4 +138,111 @@
         font-size: 1.2em;
         padding: 1em;
     }
+}
+
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7); /* Tumšāks pārklājums */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    background-color: #2f4b6b;
+    color: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    width: 600px;
+    max-width: 90%;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+    position: relative;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal h3 {
+    color: #a9cdf2;
+    margin-bottom: 1.5rem;
+    font-size: 1.6em;
+    font-weight: 600;
+}
+
+.modal input,
+.modal textarea,
+.modal select {
+    width: 100%;
+    padding: 1em;
+    font-size: 1em;
+    border-radius: 8px;
+    border: 1px solid #a9cdf2;
+    background-color: #1e2a38;
+    color: #fff;
+    margin-bottom: 1em;
+    font-family: 'Source Code Pro', monospace;
+    box-sizing: border-box;
+}
+
+.modal textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.modal select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23ccc'%3E%3Cpath d='M2 4l4 4 4-4z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+}
+
+.modal .edit-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1em;
+}
+
+.modal .edit-button {
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    background-color: #4c84b3;
+    color: #fff;
+    border: 1px solid #a9cdf2;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.modal .edit-button:hover {
+    background-color: #3a6a99;
+}
+
+.modal .cancel-button {
+    background-color: #a94442;
+    border-color: #e4b1af;
+}
+
+.modal .cancel-button:hover {
+    background-color: #8d2e2c;
+}
+
+.modal .edit-button:active,
+.modal .cancel-button:active {
+    transform: scale(0.97);
 }

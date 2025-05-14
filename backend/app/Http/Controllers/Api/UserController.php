@@ -13,7 +13,7 @@ class UserController extends Controller
     public function update(UpdateProfileRequest $request)
     {
         $user = $request->user();
-        
+
         $data = $request->validated();
 
         if ($request->filled('password')) {
@@ -27,21 +27,11 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-    
         if ($request->user()->role !== 'admin') {
             return response()->json(['message' => 'Unauthorized'], 403);
         }
-        $users = User::all(); 
-        return response()->json($users);
-    }
 
-    public function sort(Request $request)
-    {
-        $sortBy = $request->get('sortBy', 'username');
-        $sortOrder = $request->get('sortOrder', 'asc');
-
-        $users = User::orderBy($sortBy, $sortOrder)->get();
-
+        $users = User::all();
         return response()->json($users);
     }
 
@@ -78,7 +68,6 @@ class UserController extends Controller
         return response()->json($user);
     }
 
-
     public function destroy($id)
     {
         $user = User::find($id);
@@ -96,32 +85,52 @@ class UserController extends Controller
     {
         $query = User::query();
 
-        if ($request->has('search') && !empty($request->search)) {
+        if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('username', 'like', "%$search%")
-                ->orWhere('email', 'like', "%$search%");
+                    ->orWhere('email', 'like', "%$search%");
             });
         }
 
-        if ($request->has('role') && !empty($request->role)) {
+        if ($request->filled('role')) {
             $query->where('role', $request->role);
         }
 
-        if ($request->has('created_on') && !empty($request->created_on)) {
+        if ($request->filled('created_on')) {
             $query->whereDate('created_at', $request->created_on);
         }
 
         $sortBy = $request->get('sortBy', 'username');
         $sortOrder = $request->get('sortOrder', 'asc');
+        $allowedSortFields = ['username', 'email', 'phone', 'role', 'rating', 'created_at'];
 
-        $allowedSortFields = ['username', 'email', 'phone', 'role', 'created_at'];
         if (!in_array($sortBy, $allowedSortFields)) {
             $sortBy = 'username';
         }
 
         $query->orderBy($sortBy, $sortOrder);
 
-        return response()->json($query->get());
+        $averageRating = (clone $query)->avg('rating');
+        $users = $query->get();
+
+        return response()->json([
+            'users' => $users,
+            'average_rating' => round($averageRating, 2),
+            'count' => $users->count(),
+        ]);
+    }
+
+    public function roleStatistics(Request $request)
+    {
+        if ($request->user()->role !== 'admin') {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
+
+        $stats = User::select('role', \DB::raw('count(*) as total'))
+            ->groupBy('role')
+            ->get();
+
+        return response()->json($stats);
     }
 }

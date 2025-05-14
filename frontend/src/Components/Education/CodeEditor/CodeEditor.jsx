@@ -9,61 +9,55 @@ import axiosClient from "../../../axios-client.js";
 
 function CodeEditor() {
     const { user, token } = useStateContext();
-    const [code, setCode] = useState("");
+    const [code, setCode] = useState("print(\"Hello, world!\")");
     const [output, setOutput] = useState("");
     const [language, setLanguage] = useState("python");
+    const [isRunning, setIsRunning] = useState(false);
 
     if (!token) {
         return <Navigate to="/login" />;
     }
 
+    const getDefaultCode = (lang) => {
+        switch (lang) {
+            case "java":
+                return `public class Main {
+    public static void main(String[] args) {
+        // Code here
+        System.out.println("Hello, world!");
+    }
+}`;
+            case "python":
+                return `print("Hello, world!")`;
+            case "javascript":
+                return `console.log("Hello, world!");`;
+            default:
+                return "";
+        }
+    };
+
     const handleLanguageChange = (event) => {
-        setLanguage(event.target.value);
+        const selectedLang = event.target.value;
+        setLanguage(selectedLang);
+        setCode(getDefaultCode(selectedLang));
     };
 
     const runCode = async () => {
-        const payload = { code, language };
-        axiosClient.post("/run-code", payload)
-            .then(({ data }) => {
-                setOutput(data.output);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    };
-
-    const handleEditorDidMount = (editor, monaco) => {
-        monaco.languages.registerCompletionItemProvider("python", {
-            provideCompletionItems: () => {
-                const suggestions = [
-                    {
-                        label: "print",
-                        kind: monaco.languages.CompletionItemKind.Function,
-                        insertText: "print()",
-                        detail: "Izvada datus uz ekrāna"
-                    },
-                    {
-                        label: "def",
-                        kind: monaco.languages.CompletionItemKind.Keyword,
-                        insertText: "def function_name():\n    ",
-                        detail: "Definē funkciju"
-                    },
-                    {
-                        label: "for",
-                        kind: monaco.languages.CompletionItemKind.Keyword,
-                        insertText: "for i in range(10):\n    ",
-                        detail: "Cikls no 0 līdz 9"
-                    },
-                    {
-                        label: "if",
-                        kind: monaco.languages.CompletionItemKind.Keyword,
-                        insertText: "if condition:\n    ",
-                        detail: "Nosacījuma pārbaude"
-                    }
-                ];
-                return { suggestions };
+        setIsRunning(true);
+        setOutput("");
+        try {
+            const payload = { code, language };
+            const { data } = await axiosClient.post("/run-code", payload);
+            setOutput(data.output);
+        } catch (error) {
+            if (error.response?.data?.output) {
+                setOutput(error.response.data.output);
+            } else {
+                setOutput("An error occurred while running the code.");
             }
-        });
+        } finally {
+            setIsRunning(false);
+        }
     };
 
     return (
@@ -92,22 +86,22 @@ function CodeEditor() {
                                 fontSize: 18,
                                 autoClosingBrackets: "always",
                             }}
-                            onMount={handleEditorDidMount} 
                             onChange={(newValue) => setCode(newValue)}
                         />
                         <div className="language-options">
                             <select className="language-select" value={language} onChange={handleLanguageChange}>
                                 <option value="python">Python</option>
                                 <option value="javascript">JavaScript</option>
-                                <option value="cpp">C++</option>
                                 <option value="java">Java</option>
                             </select>
                             <button className="clear btn" onClick={() => setCode("")}>CLEAR</button>
-                            <button className="run btn" onClick={runCode}>RUN</button>
+                            <button className="run btn" onClick={runCode} disabled={isRunning}>
+                                {isRunning ? "Running..." : "RUN"}
+                            </button>
                             <button className="submit btn">SUBMIT</button>
                         </div>
                         <div className="output">
-                            <h3>Rezultāts:</h3>
+                            <h3>OUTPUT:</h3>
                             <pre>{output}</pre>
                         </div>
                     </div>

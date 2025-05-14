@@ -3,26 +3,32 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\ProgrammingTheory;
+use App\Models\ProgrammingTopic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 
 class TheoryController extends Controller
 {
+    
     public function index($topicId, Request $request)
     {
-        $perPage = $request->input('per_page', 1); 
+        $pageSize = $request->input('per_page', 1);
 
         $theories = ProgrammingTheory::with(['user:id,username', 'topic:id,title'])
             ->where('topic_id', $topicId)
             ->orderBy('id')
-            ->paginate($perPage);
+            ->paginate($pageSize);
 
         $theories->getCollection()->transform(function ($theory) {
-            $relativePath = str_replace('storage/', '', $theory->filepath); 
-            $markdown = Storage::disk('public')->get($relativePath);
+            $relativePath = str_replace('storage/', '', $theory->filepath);
 
-            $theory->content = $markdown;
+            if (Storage::disk('public')->exists($relativePath)) {
+                $theory->content = Storage::disk('public')->get($relativePath);
+            } else {
+                $theory->content = null;
+            }
 
             return $theory;
         });
@@ -42,6 +48,8 @@ class TheoryController extends Controller
 
         Storage::disk('public')->put($relativePath, $request->input('content'));
 
-        return response()->json(['message' => 'Teorija veiksmīgi saglabāta.']);
+        return response()->json([
+            'message' => 'Theory successfully updated.'
+        ]);
     }
 }

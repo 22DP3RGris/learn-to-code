@@ -16,13 +16,16 @@ function Theory() {
     const navigate = useNavigate();
     const { user } = useStateContext();
     const canEdit = user?.role === "teacher" || user?.role === "admin";
-
     const [theoryPages, setTheoryPages] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(true);
     const [editMode, setEditMode] = useState(false);
     const [editedContent, setEditedContent] = useState("");
     const [questions, setQuestions] = useState([]);
+
+    const [newTitle, setNewTitle] = useState("");
+    const [newContent, setNewContent] = useState("");
+    const [showNewForm, setShowNewForm] = useState(false);
 
     const fetchTheory = async () => {
         setLoading(true);
@@ -47,16 +50,6 @@ function Theory() {
         window.scrollTo({ top: 0, behavior: "smooth" });
     }, [currentPage]);
 
-    useEffect(() => {
-        if (theoryPages.current_page === theoryPages.last_page) {
-            axiosClient.get(`/theory/${topicId}/questions`)
-                .then(({ data }) => setQuestions(data))
-                .catch((err) => console.error("Failed to load questions:", err));
-        } else {
-            setQuestions([]);
-        }
-    }, [topicId, theoryPages]);
-
     const goToNext = () => {
         if (theoryPages.current_page < theoryPages.last_page) {
             setCurrentPage((prev) => prev + 1);
@@ -71,16 +64,29 @@ function Theory() {
 
     const theory = theoryPages?.data?.[0];
 
-    const handleSave = async () => {
-        try {
-            await axiosClient.post(`/theory/${theory.id}/change-request`, {
-                content: editedContent,
-                theory_id: theory.id
-            });
-            alert("Change request submitted for review.");
-            setEditMode(false);
-        } catch (err) {
-            console.error("Failed to submit change request:", err);
+    const handleRequest = async () => {
+        if (newTitle || theory) {
+            try {
+                const requestData = {
+                    theory_id:  newTitle ? null : theory?.id,
+                    title: newTitle ? newTitle : theory.title,
+                    status: newTitle ? "NEW" : "UPDATE", 
+                    content: newContent || editedContent,
+                    topic_id: topicId,
+                };
+
+                await axiosClient.post(`/theory/${theory?.id}/change-request`, requestData);
+                alert("Request submitted for review.");
+                setEditMode(false);
+                setNewTitle(""); 
+                setNewContent(""); 
+
+                if (!newTitle) {
+                    setShowNewForm(false); 
+                }
+            } catch (err) {
+                console.error("Failed to submit change request:", err);
+            }
         }
     };
 
@@ -119,7 +125,7 @@ function Theory() {
                                         <div className="edit-buttons">
                                             {editMode ? (
                                                 <>
-                                                    <button className="edit-button" onClick={handleSave}>Save</button>
+                                                    <button className="edit-button" onClick={handleRequest}>Save</button>
                                                     <button className="edit-button cancel-button" onClick={() => setEditMode(false)}>Cancel</button>
                                                 </>
                                             ) : (
@@ -128,12 +134,19 @@ function Theory() {
                                                 )
                                             )}
                                         </div>
+
+                                        {canEdit && (
+                                            <button className="edit-button" onClick={() => setShowNewForm(true)}>
+                                                Add New Theory
+                                            </button>
+                                        )}
+
                                         <div className="pagination">
                                             <button onClick={goToPrev} disabled={currentPage === 1}>Previous</button>
                                             <span>Page {theoryPages.current_page} of {theoryPages.last_page}</span>
                                             <button onClick={goToNext} disabled={currentPage === theoryPages.last_page}>Next</button>
-
                                         </div>
+
                                         <button
                                             className="edit-button"
                                             onClick={() => navigate(`/topics/${topicId}/questions/1`)}
@@ -141,9 +154,89 @@ function Theory() {
                                             Go to Questions
                                         </button>
                                     </div>
+
+                                    {showNewForm && (
+                                        <div className="modal-overlay">
+                                            <div className="modal">
+                                                <h3>Add New Theory Page</h3>
+                                                <input
+                                                    type="text"
+                                                    placeholder="Enter title"
+                                                    value={newTitle}
+                                                    onChange={(e) => setNewTitle(e.target.value)}
+                                                    className="new-title-input"
+                                                />
+                                                <textarea
+                                                    placeholder="Enter markdown content"
+                                                    value={newContent}
+                                                    onChange={(e) => setNewContent(e.target.value)}
+                                                    rows={10}
+                                                    className="edit-textarea"
+                                                />
+                                                <div className="edit-buttons">
+                                                    <button className="edit-button" onClick={handleRequest}>Submit</button>
+                                                    <button
+                                                        className="edit-button cancel-button"
+                                                        onClick={() => {
+                                                            setShowNewForm(false);
+                                                            setNewTitle("");
+                                                            setNewContent("");
+                                                        }}
+                                                    >
+                                                        Cancel
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
                             ) : (
-                                <p>Theory content is not available.</p>
+                                <>
+                                    <div className="no-theory">
+                                        <p>No theory content is available for this topic.</p>
+                                        {canEdit && (
+                                            <div className="edit-buttons">
+                                                <button className="edit-button" onClick={() => setShowNewForm(true)}>
+                                                    Create First Theory Page
+                                                </button>
+                                            </div>
+                                        )}
+                                    </div>
+                                    {showNewForm && (
+                                        <div className="modal-overlay">
+                                            <div className="modal">
+                                                <h3>Add New Theory Page</h3>
+                                                <input
+                                                    type="text"
+                                                    placeholder="Enter title"
+                                                    value={newTitle}
+                                                    onChange={(e) => setNewTitle(e.target.value)}
+                                                    className="new-title-input"
+                                                />
+                                                <textarea
+                                                    placeholder="Enter markdown content"
+                                                    value={newContent}
+                                                    onChange={(e) => setNewContent(e.target.value)}
+                                                    rows={10}
+                                                    className="edit-textarea"
+                                                />
+                                                <div className="edit-buttons">
+                                                    <button className="edit-button" onClick={handleRequest}>Submit</button>
+                                                    <button
+                                                        className="edit-button cancel-button"
+                                                        onClick={() => {
+                                                            setShowNewForm(false);
+                                                            setNewTitle("");
+                                                            setNewContent("");
+                                                        }}
+                                                    >
+                                                        Cancel
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+                                </>
                             )}
                         </div>
                     )}

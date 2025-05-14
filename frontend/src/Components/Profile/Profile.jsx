@@ -144,6 +144,7 @@ function Profile() {
                                 <select id="role" name="role" value={formData.role} onChange={handleChange}>
                                     <option value="student">Student</option>
                                     <option value="teacher">Teacher</option>
+                                    {user.role === 'admin' && <option value="admin">Admin</option>}
                                 </select>
                             </div>
                         </div>

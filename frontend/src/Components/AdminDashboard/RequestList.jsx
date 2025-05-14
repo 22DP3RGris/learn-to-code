@@ -39,6 +39,7 @@ function RequestsList({ requests, setRequests, refreshRequests }) {
                             <th>Theory Title</th>
                             <th>Author</th>
                             <th>Rating</th>
+                            <th>Status</th>
                             <th>Suggested Content</th>
                             <th>Actions</th>
                         </tr>
@@ -46,9 +47,10 @@ function RequestsList({ requests, setRequests, refreshRequests }) {
                     <tbody>
                         {requests.map((request) => (
                             <tr key={request.id}>
-                                <td>{request.theory?.title || "Unknown Title"}</td>
+                                <td>{request.title || "Unknown Title"}</td>
                                 <td>{request.user?.username || "Unknown Author"}</td>
                                 <td>{request.user?.rating}</td>
+                                <td>{request.status}</td>
                                 <td style={{ maxWidth: "300px", whiteSpace: "pre-wrap" }}>
                                     {request.content || "No Content"}
                                 </td>

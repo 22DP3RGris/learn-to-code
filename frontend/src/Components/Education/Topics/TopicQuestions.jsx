@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import axiosClient from "../../../axios-client";
 import Header from "../../Header/Header";
 import SidePanel from "../../SidePanel/SidePanel";
 import Loading from "../../Loading/Loading.jsx";
+import { useStateContext } from "../../../contexts/ContextProvider.jsx";
 import "./TopicQuestions.css";
 
 function TopicQuestions() {
     const { topicId } = useParams();
+    const { user, token } = useStateContext();
     const [questions, setQuestions] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(true);
@@ -18,6 +20,10 @@ function TopicQuestions() {
     const [questionStatuses, setQuestionStatuses] = useState({});
 
     const currentQuestion = questions?.data?.[0];
+
+    if (!token) {
+        return <Navigate to="/login" />;
+    }
 
     useEffect(() => {
         fetchQuestions();

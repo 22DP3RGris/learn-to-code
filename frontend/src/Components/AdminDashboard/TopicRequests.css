@@ -1,0 +1,19 @@
+.topic-requests {
+  padding: 1rem;
+}
+
+.request-list {
+  list-style: none;
+  padding: 0;
+}
+
+.request-item {
+  background-color: #f2f2f2;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.actions button {
+  margin-right: 0.5rem;
+}

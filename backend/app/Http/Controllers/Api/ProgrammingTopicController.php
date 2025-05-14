@@ -25,4 +25,22 @@ class ProgrammingTopicController extends Controller
 
         return response()->json($topics);
     }
+
+    public function store(Request $request, $language)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'difficulty' => 'required|in:beginner,intermediate,advanced,expert',
+        ]);
+
+        $topic = Topic::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'difficulty' => $request->difficulty,
+            'language_id' => $language,
+        ]);
+
+        return response()->json($topic, 201);
+    }
 }

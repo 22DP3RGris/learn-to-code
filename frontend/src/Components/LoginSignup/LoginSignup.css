@@ -1,11 +1,9 @@
 .card-container{
-
     margin-top: 3em;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 25vw;
-    min-width: 25em;
+    min-width: 23vw;
     background-color: #395a7d;
     border-radius: 15px;
     border: #252729 5px solid;

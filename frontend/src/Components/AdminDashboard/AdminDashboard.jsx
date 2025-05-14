@@ -7,11 +7,13 @@ import axiosClient from '../../axios-client.js';
 import Loading from '../Loading/Loading.jsx';
 import UserTable from './UserTable.jsx';
 import RequestsList from './RequestList.jsx';
+import TopicRequestsList from './TopicRequests.jsx';
 
 function AdminDashboard() {
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
     const [requests, setRequests] = useState([]);
+    const [topicRequests, setTopicRequests] = useState([]);
     const [loading, setLoading] = useState(true);
     const [view, setView] = useState('users');
 
@@ -38,10 +40,20 @@ function AdminDashboard() {
             });
     };
 
+    const fetchTopicRequests = () => {
+        axiosClient.get('/topic-change-requests')
+            .then(({ data }) => {
+                setTopicRequests(data);
+            })
+            .catch(err => {
+                console.error('Error fetching topic requests:', err);
+            });
+    };
 
     useEffect(() => {
         fetchUsers();
         fetchRequests();
+        fetchTopicRequests();
     }, []);
 
     return (
@@ -61,18 +73,30 @@ function AdminDashboard() {
                                     <select value={view} onChange={(e) => setView(e.target.value)}>
                                         <option value="users">Users</option>
                                         <option value="requests">Theory Change Requests</option>
+                                        <option value="topic-requests">Topic Change Requests</option>
                                     </select>
                                 </div>
 
                                 {view === 'users' && (
                                     <UserTable users={users} setUsers={setUsers} />
                                 )}
+
                                 {view === 'requests' && (
                                     <div className='request-list'>
                                         <RequestsList 
                                             requests={requests}
                                             setRequests={setRequests}
                                             refreshRequests={fetchRequests}
+                                        />
+                                    </div>
+                                )}
+
+                                {view === 'topic-requests' && (
+                                    <div className='request-list'>
+                                        <TopicRequestsList 
+                                            requests={topicRequests}
+                                            setRequests={setTopicRequests}
+                                            refreshRequests={fetchTopicRequests}
                                         />
                                     </div>
                                 )}

@@ -4,6 +4,7 @@ import axiosClient from "../../../axios-client";
 import Header from "../../Header/Header";
 import SidePanel from "../../SidePanel/SidePanel";
 import Loading from "../../Loading/Loading.jsx";
+import { useStateContext } from "../../../contexts/ContextProvider.jsx";
 
 import "./Topics.css";
 
@@ -11,6 +12,16 @@ function Topics() {
     const { name } = useParams();
     const [topics, setTopics] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [showNewForm, setShowNewForm] = useState(false);
+    const [newTopic, setNewTopic] = useState({
+        title: "",
+        description: "",
+        difficulty: "beginner",
+        status: "NEW",
+    });
+
+    const { user } = useStateContext();
+    const canEdit = user?.role === "teacher" || user?.role === "admin";
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -27,6 +38,24 @@ function Topics() {
             setLoading(false);
         }
     }, [name]);
+
+    const handleRequestTopic = async () => {
+        try {
+            console.log("Requesting topic:", newTopic);
+            await axiosClient.post(`/programming-languages/${name}/change-requests`, {
+                ...newTopic,
+            });
+
+            setShowNewForm(false);
+
+            setNewTopic({ title: "", description: "", difficulty: "beginner", status: "NEW" });
+
+            alert("Topic request submitted and is pending approval.");
+        } catch (error) {
+            console.error("Failed to request topic:", error);
+        }
+    };
+
 
     return (
         <div className="topics-page">
@@ -58,12 +87,63 @@ function Topics() {
                                             </div>
                                         </li>
                                     ))}
+                                    <div className="add-topic">
+                                        {canEdit && (
+                                            <button className="edit-button" onClick={() => setShowNewForm(true)}>
+                                                Add New Topic
+                                            </button>
+                                        )}
+                                    </div>
                                 </ul>
                             </>
                         )}
                     </div>
                 </div>
             </div>
+
+            {showNewForm && (
+                <div className="modal-overlay">
+                    <div className="modal">
+                        <h3>Add New Topic</h3>
+                        <input
+                            type="text"
+                            placeholder="Title"
+                            value={newTopic.title}
+                            onChange={(e) => setNewTopic({ ...newTopic, title: e.target.value })}
+                            className="new-title-input"
+                        />
+                        <textarea
+                            placeholder="Description"
+                            value={newTopic.description}
+                            onChange={(e) => setNewTopic({ ...newTopic, description: e.target.value })}
+                            rows={4}
+                            className="edit-textarea"
+                        />
+                        <select
+                            value={newTopic.difficulty}
+                            onChange={(e) => setNewTopic({ ...newTopic, difficulty: e.target.value })}
+                            className="difficulty-select"
+                        >
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                            <option value="expert">Expert</option>
+                        </select>
+                        <div className="edit-buttons">
+                            <button className="edit-button" onClick={handleRequestTopic}>Submit</button>
+                            <button
+                                className="edit-button cancel-button"
+                                onClick={() => {
+                                    setShowNewForm(false);
+                                    setNewTopic({ title: "", description: "", difficulty: "beginner" });
+                                }}
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
