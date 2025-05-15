@@ -303,7 +303,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .role-statistics .stat-box {
-    width: 30%;
+    width: 25%;
     background-color: #395a7d;
     border: 2px solid #252729;
     border-radius: 10px;

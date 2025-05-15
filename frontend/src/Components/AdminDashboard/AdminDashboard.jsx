@@ -8,14 +8,20 @@ import Loading from '../Loading/Loading.jsx';
 import UserTable from './UserTable.jsx';
 import RequestsList from './RequestList.jsx';
 import TopicRequestsList from './TopicRequests.jsx';
+import { useStateContext } from '../../contexts/ContextProvider.jsx';
 
 function AdminDashboard() {
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
+    const { user, token } = useStateContext();
     const [requests, setRequests] = useState([]);
     const [topicRequests, setTopicRequests] = useState([]);
     const [loading, setLoading] = useState(true);
     const [view, setView] = useState('users');
+
+    if (user?.role !== 'admin') {
+        navigate('/login');
+    }
 
     const fetchUsers = () => {
         axiosClient.get('/admin/users')

@@ -16,7 +16,14 @@ class SignupRequest extends FormRequest
         return [
            'username' => ['required', 'string', 'max:55', 'regex:/^(?=.*[A-Za-z])[A-Za-z0-9\s]+$/'],
 
-           'email' => 'required|string|email|max:255|unique:users,email',
+           'email' => [
+                        'required',
+                        'string',
+                        'email',
+                        'max:255',
+                        'unique:users,email',
+                        'regex:/^[\w\.-]+@[\w\.-]+\.[a-zA-Z]{2,}$/',
+            ],
 
            'phone' => 'required|string|max:15',
 
