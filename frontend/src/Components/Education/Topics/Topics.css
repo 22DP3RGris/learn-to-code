@@ -246,3 +246,73 @@
 .modal .cancel-button:active {
     transform: scale(0.97);
 }
+
+@media screen and (max-width: 768px) {
+    .choose-topic {
+        font-size: 1.2em;
+        padding: 1em;
+        margin-bottom: 1.5em;
+    }
+
+    .topics-list {
+        padding: 0;
+        max-width: 90%;
+    }
+
+    .topics-list ul {
+        padding: 1em;
+        margin: 1em 0;
+    }
+
+    .topic-item {
+        padding: 0.8em;
+        align-items: center;
+    }
+
+    .topic-info {
+        align-items: center;
+        text-align: center;
+    }
+
+    .topic-title {
+        font-size: 1.3em;
+    }
+
+    .topic-description,
+    .topic-difficulty,
+    .topic-theory-size {
+        font-size: 1em;
+    }
+
+    .add-topic {
+        font-size: 1.2em;
+        padding: 0.8em;
+    }
+
+    .modal {
+        width: 95%;
+        padding: 1.5rem;
+    }
+
+    .modal h3 {
+        font-size: 1.3em;
+    }
+
+    .modal input,
+    .modal textarea,
+    .modal select {
+        font-size: 0.95em;
+        padding: 0.8em;
+    }
+
+    .modal .edit-buttons {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5em;
+    }
+
+    .modal .edit-button {
+        font-size: 0.95em;
+        padding: 0.8em;
+    }
+}

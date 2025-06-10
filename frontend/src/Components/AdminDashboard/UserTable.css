@@ -245,6 +245,61 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     cursor: pointer;
 }
 
+.request-list{
+    width: 100%;
+}
+
+.request-list .message{
+    background-color: #2f4b6b;
+    color: #F8F9FA;
+    font-size: 1.4em;
+    padding: 1em;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 1em;
+    border: 2px solid #252729;
+}
+
+.role-statistics {
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+    background-color: #2f4b6b;
+    padding: 1em;
+    margin-bottom: 1.5em;
+    border-radius: 12px;
+    border: 2px solid #252729;
+    color: #F8F9FA;
+    font-size: 1.1em;
+    text-align: center;
+}
+
+.role-statistics .stat-box {
+    width: 30%;
+    background-color: #395a7d;
+    border: 2px solid #252729;
+    border-radius: 10px;
+    padding: 1em 0;
+    box-shadow: 0 0 10px rgba(70, 117, 164, 0.4);
+    transition: background-color 0.3s;
+}
+
+.role-statistics .stat-box:hover {
+    background-color: #4b6e95;
+}
+
+.role-statistics .role {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.6em;
+}
+
+.role-statistics .count {
+    font-size: 1.5em;
+    color: #ffffff;
+}
+
 @media (max-width: 768px) {
     .user-table table {
         font-size: 0.9em;
@@ -270,59 +325,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     .filter-bar select {
         width: 100%;
     }
-}
 
-.request-list{
-    width: 100%;
-}
+    .stat-box{
+        width: 30%;
+    }
 
-.request-list .message{
-    background-color: #2f4b6b;
-    color: #F8F9FA;
-    font-size: 1.4em;
-    padding: 1em;
-    border-radius: 10px;
-    text-align: center;
-    margin-bottom: 1em;
-    border: 2px solid #252729;
-}
-
-.role-statistics {
-    display: flex;
-    justify-content: space-between;
-    gap: 2em;
-    flex-wrap: wrap;
-    background-color: #2f4b6b;
-    padding: 1em;
-    margin-bottom: 1.5em;
-    border-radius: 12px;
-    border: 2px solid #252729;
-    color: #F8F9FA;
-    font-size: 1.1em;
-    text-align: center;
-}
-
-.role-statistics .stat-box {
-    width: 25%;
-    background-color: #395a7d;
-    border: 2px solid #252729;
-    border-radius: 10px;
-    padding: 1em 1.5em;
-    min-width: 120px;
-    box-shadow: 0 0 10px rgba(70, 117, 164, 0.4);
-    transition: background-color 0.3s;
-}
-
-.role-statistics .stat-box:hover {
-    background-color: #4b6e95;
-}
-
-.role-statistics .role {
-    font-weight: bold;
-    font-size: 1.2em;
-}
-
-.role-statistics .count {
-    font-size: 1.5em;
-    color: #ffffff;
+    .role-statistics {
+        flex-direction: row;
+        justify-content: center; 
+    }
 }

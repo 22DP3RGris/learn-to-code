@@ -23,51 +23,82 @@
 
 ### Galvenās funkcionalitātes
 
-- Teorētisko zināšanu publicēšana, apskatīšana;
-- Privāto/publisko programmēšanas uzdevumu
-veidošana;
-- Skaidrs uzdevuma apraksts izglītojamiem (Atsauces uz konkrēto teoriju);
-- Rezultātu automātiskā pārbaude;
-- Atgriezeniskā saite;
-- Reitinga sadaļa.
+- teorētisko zināšanu publicēšana, rediģēšana un apskatīšana;
+- programmēšanas uzdevumu veidošana, risināšana;
+- uzdevumu rezultātu automātiskā analīze un izvērtēšana;
+- programmas koda apstrāde un palaišana;
+- satura pilnveidošanas pieprasījumu apstrāde;
+- statistikas apkopošana, izmantojot kārtošanu un filtrēšanu;
+- reitinga punktu piešķiršana vai atņemšana.
+
 
 ## Izmantotās tehnoloģijas
 
-- React.js
-- Laravel
+### Back-end
+
+- Laravel Framework v11.44.7
+- MySQL v8.4.3
+- RESTful API
+
+### Front-end
+
+- React 18.2.0
+- CSS
+- HTTP Client: Axios
+
+## Programmas uzstādīšana
+
+### Prasības
+- Node.js v14+
+- PHP v8.0+
+- Composer
 - MySQL
+
+### Back-end palaišana
+```bash
+cd backend
+
+composer install
+
+# Izveido .env failu
+cp .env.example .env # Jāiestata izmantojamā datubāze
+
+php artisan key:generate
+
+php artisan migrate --seed
+
+php artisan serve
+```
+
+### Front-end palaišana
+```bash
+cd frontend
+
+npm install
+
+npm run dev
+```
 
 ## Izstrādes stāvokļi
 
 - [x] Lietotnes galvene ar navigāciju uz profilu reģistrētajiem lietotājiem (Header);
 - [x] Lietotnes kājene (Footer);
-![image](/frontend/public/Footer.png)
 - [x] Pielāgota lietotnes ritjosla (web scrollkit)
 - [x] Reģistrēšanas/Ielogošanas/Izlogošanas iespēja gan frontend, gan backend, ierakstu saglabāšana MySQL datubāzē;
-![image](/frontend/public/Login.png)
-![image](/frontend/public/Signup.png)
 - [x] Datu validācija formās
-![image](/frontend/public/Validation.png)
 - [x] Lietotāja profils
-![image](/frontend/public/Profile.png)
 - [x] Sānu navigācijas iekļaušana projekta lapās (SideBar);
-![image](/frontend/public/Sidebar.png)
 - [x] 404 NotFound lapa (Tiks uzlabots dizains);
 - [x] Iesākta lomu sadalīšana viesim (1. Bilde) un reģistrētajam lietotājam (2. bilde) pamatojoties uz piešķirto access token;
-![image](/frontend/public/404-notfound-unlogged.png)
-![image](/frontend/public/404-logged.png)
-- [x] Dizains tiek pārveidots par responsīvu dažādās ierīcēs;
-![image](/frontend/public/Phoneview.png)
-- [ ] Iesākts koda editors, pagaidām slikta drošība, bet strādā vairākās valodās.
-![image](/frontend/public/Code-editor.png)
-- [ ] Galvenā lapa, vienlaikus jaunumu sadaļa (News) !!! IZSTRĀDES PROCESĀ
-- [ ] Pirmā teorija sadaļa par Python pamatiem !!! TIEK PLĀNOTS IZSKATS UN DATUBĀZES STRUKTŪRA
-- [ ] Teorētisko uzdevumu sadaļa par Python pamatiem;
-- [ ] Praktisko uzdevumu sadaļa par Python pamatiem !!! TIEK DOMĀTS, KĀ VARĒS PALAIST IESNIEGTO KODU
-- [ ] Izveidot skolotāja lomu, kam būs tiesības veidot uzdevumus un teoriju;
+- [x] Dizains tiek pārveidots par responsīvu telefoniem;
+- [ ] Iesākts koda editors, pagaidām slikta drošība.
+- [x] Galvenā lapa, vienlaikus jaunumu sadaļa (News);
+- [x] Pirmā teorija sadaļa par Python pamatiem;
+- [x] Teorētisko uzdevumu sadaļa par Python pamatiem;
+- [ ] Praktisko uzdevumu sadaļa par Python pamatiem;
+- [x] Izveidot skolotāja lomu, kam būs tiesības veidot uzdevumus un teoriju;
 - [ ] Reitinga sadaļa;
 - [ ] Atgriezeniskās saites veidošana.
-
-**!!! Pēc iespējas saraksts turpināsies un papildināsies.**
+- [ ] Iespēja veidot privātos uzdevumus.
 
 

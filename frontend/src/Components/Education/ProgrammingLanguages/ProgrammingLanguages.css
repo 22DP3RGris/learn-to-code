@@ -6,7 +6,7 @@
 }
 
 .choose-language{
-    font-size: 1.2em;
+    font-size: 1.1em;
     color: #ffffff;
     background-color: #c25c5c;
     border: #8a5d5d 2px solid;
@@ -74,4 +74,45 @@
     text-align: center;
     font-size: 1.2em;
     color: #ffffff;
+}
+
+
+@media screen and (max-width: 768px) {
+
+    .container {
+        width: 90%;
+    }
+
+    .choose-language {
+        font-size: 1em;
+        padding: 0.8em;
+        margin-bottom: 1.5em;
+        text-align: center;
+    }
+
+    .language-list {
+        flex-direction: column;
+        padding: 0;
+        width: 100%;
+    }
+
+    .language-list .language-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .language-list .language-item img {
+        width: 2.5em;
+        height: 2.5em;
+        margin-bottom: 0.5em;
+    }
+
+    .language-list span {
+        font-size: 1.1em;
+    }
+
+    .language-list p {
+        font-size: 1em;
+        padding: 0 0.5em;
+    }
 }

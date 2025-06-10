@@ -93,3 +93,28 @@
     padding-bottom: 0.2em;
     border-bottom: solid 2px #2c7d9b;
 }
+
+@media screen and (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+    
+    .btn {
+        width: 100%;
+        margin: 1em 0 0 0;
+    }
+    
+    .language-options {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .language-select {
+        width: 100%;
+    }
+    
+    .editor, .output {
+        font-size: 1.2em;
+    }
+    
+}

@@ -23,7 +23,7 @@
 
 .LoginSignup{
     display: flex;
-    height: 100vh;
+    min-height: 100vh;
     flex-direction: column;
     align-items: center;
 }
@@ -172,4 +172,46 @@
     color: #1f4f83;
     padding: 0.5em;
     font-size: 1em;
+}
+
+@media screen and (max-width: 768px) {
+    .card-container {
+        min-width: 90vw;  
+        margin-top: 1.5em;
+        padding: 1em 1em 0 1em;
+    }
+
+    .form {
+        width: 100%;
+    }
+
+    .inputs {
+        width: 100%;
+    }
+
+    .input {
+        padding: 0.4em 1em;
+    }
+
+    .input input,
+    .input select {
+        font-size: 0.9em;
+    }
+
+    .form h1 {
+        margin: 0 0 1em 0;
+        font-size: 1.4em;
+        padding: 0.4em 0;
+    }
+
+    .submit-form {
+        font-size: 1em;
+        padding: 0.5em 1.5em;
+    }
+
+    .sumbit-container {
+        flex-direction: column;
+        gap: 0.8em;
+        margin: 1em 0;
+    }
 }

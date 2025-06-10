@@ -62,3 +62,28 @@
     text-align: center;
     border: #a9cdf2 1px solid;
 }
+
+@media (max-width: 768px) {
+    .quiz {
+        max-width: 90vw;
+        flex-direction: column;
+        padding: 1em;
+    }
+
+    .question-block p {
+        font-size: 1.1em;
+    }
+
+    .question-block label {
+        font-size: 1em;
+        padding: 0.5em;
+    }
+
+    .feedback {
+        font-size: 1em;
+    }
+
+    .status {
+        font-size: 1em;
+    }
+}

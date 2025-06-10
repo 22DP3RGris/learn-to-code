@@ -92,13 +92,11 @@ function CodeEditor() {
                             <select className="language-select" value={language} onChange={handleLanguageChange}>
                                 <option value="python">Python</option>
                                 <option value="javascript">JavaScript</option>
-                                <option value="java">Java</option>
                             </select>
                             <button className="clear btn" onClick={() => setCode("")}>CLEAR</button>
                             <button className="run btn" onClick={runCode} disabled={isRunning}>
                                 {isRunning ? "Running..." : "RUN"}
                             </button>
-                            <button className="submit btn">SUBMIT</button>
                         </div>
                         <div className="output">
                             <h3>OUTPUT:</h3>

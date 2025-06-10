@@ -52,6 +52,11 @@ function Topics() {
 
             alert("Topic request submitted and is pending approval.");
         } catch (error) {
+            if (error.response && error.response.status === 422) {
+                const errors = error.response.data.errors;
+                const errorMessage = Object.values(errors).flat().join(", ");
+                alert(`Validation failed: ${errorMessage}`);
+            }
             console.error("Failed to request topic:", error);
         }
     };

@@ -13,6 +13,7 @@ class ChangeRequest extends Model
 
     protected $fillable = [
         'language_id',
+        'topic_id',
         'user_id',
         'title',
         'description',

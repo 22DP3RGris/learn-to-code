@@ -65,27 +65,53 @@ function Theory() {
     const theory = theoryPages?.data?.[0];
 
     const handleRequest = async () => {
-        if (newTitle || theory) {
+        if (showNewForm) {
+            if (!newTitle.trim() || !newContent.trim()) {
+                alert("Please fill in both title and content.");
+                return;
+            }
             try {
                 const requestData = {
-                    theory_id:  newTitle ? null : theory?.id,
-                    title: newTitle ? newTitle : theory.title,
-                    status: newTitle ? "NEW" : "UPDATE", 
-                    content: newContent || editedContent,
+                    theory_id: null, 
+                    title: newTitle,
+                    status: "NEW",
+                    content: newContent,
                     topic_id: topicId,
                 };
 
-                await axiosClient.post(`/theory/${theory?.id}/change-request`, requestData);
-                alert("Request submitted for review.");
-                setEditMode(false);
-                setNewTitle(""); 
-                setNewContent(""); 
-
-                if (!newTitle) {
-                    setShowNewForm(false); 
-                }
+                await axiosClient.post(`/theory/${theory.id}/change-request`, requestData);
+                alert("Theory request submitted and is pending approval.");
+                setShowNewForm(false);
+                setNewTitle("");
+                setNewContent("");
             } catch (err) {
-                console.error("Failed to submit change request:", err);
+                if (err.response && err.response.status === 422) {
+                    const errors = err.response.data.errors;
+                    const errorMessage = Object.values(errors).flat().join(", ");
+                    alert(`Validation error: ${errorMessage}`);
+                }
+                console.error("Error:", err);
+            }
+        } else if (theory) {
+            try {
+                const requestData = {
+                    theory_id: theory.id,
+                    title: theory.title,
+                    status: "UPDATE",
+                    content: editedContent,
+                    topic_id: topicId,
+                };
+
+                await axiosClient.post(`/theory/${theory.id}/change-request`, requestData);
+                alert("Theory request submitted and is pending approval.");
+                setEditMode(false);
+            } catch (err) {
+                if (err.response && err.response.status === 422) {
+                    const errors = err.response.data.errors;
+                    const errorMessage = Object.values(errors).flat().join(", ");
+                    alert(`Validation error: ${errorMessage}`);
+                }
+                console.error("Error:", err);
             }
         }
     };

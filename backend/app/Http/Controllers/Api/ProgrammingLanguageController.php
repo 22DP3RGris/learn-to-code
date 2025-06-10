@@ -13,8 +13,9 @@ class ProgrammingLanguageController extends Controller
 {
     $languages = ProgrammingLanguage::all();
 
-    foreach ($languages as $language) {
-        $language->image = asset('storage/' . $language->image);
+    foreach ($languages as $language) 
+    {
+        $language->image = asset('storage/' . str_replace('public/', '', $language->image));
     }
 
     return response()->json($languages);

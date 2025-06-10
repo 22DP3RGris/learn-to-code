@@ -101,6 +101,11 @@ h1{
 }
 
 @media screen and (max-width: 768px){
+
+    h1{
+        font-size: 1.6em;
+    }
+
     .navbar{
         width: 20%;
     }
@@ -111,6 +116,34 @@ h1{
 
     .ham-menu{
         display: flex;
+    }
+
+    .navbar ul.active {
+        display: flex;
+        position: absolute;
+        top: 6em; 
+        right: 0;
+        flex-direction: column;
+        height: auto;
+        width: 100vw;
+        background-color: #234161;
+        z-index: 9999;
+        border-top: 1px solid #101e2d;
+    }
+
+    .nav-text {
+        margin-left: 1em;
+        color: #F8F9FA;
+        font-size: 1.2em;
+        white-space: nowrap;
+    }
+
+    .navbar ul.active li {
+        border: none;
+        border-bottom: 1px solid #101e2d;
+        width: 100%;
+        justify-content: flex-start;
+        padding-left: 2em;
     }
 }
 
